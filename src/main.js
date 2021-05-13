@@ -56,3 +56,7 @@ let borderUISize = game.config.height / 15;
 let borderPadding = borderUISize / 3;
 
 let keyLeft, keyRight, keyUp, keyDown, keyI, keyEsc, keySpace;
+
+// globals
+let mapDims = {width: 4000, height: 4000 },
+    playerStartPos = {x: 0, y: 0};
