@@ -8,7 +8,6 @@ class Instructions extends Phaser.Scene {
     }
 
     create() {
-        console.log('instruction found');
         let instructConfig = {
             fontFamily: 'Century Gothic',
             fontSize: '26px',

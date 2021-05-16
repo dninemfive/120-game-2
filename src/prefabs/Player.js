@@ -3,7 +3,6 @@ class Player extends Phaser.GameObjects.Sprite {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
         this.pos = new Phaser.Math.Vector2(playerStartPos);
-        console.log("started player");
     }
 
     update() {
