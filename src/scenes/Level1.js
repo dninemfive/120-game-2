@@ -8,7 +8,7 @@ class Level1 extends Phaser.Scene {
     }
 
     create() {
-        this.background = this.add.sprite(game.config.width / 2, game.config.height / 2,"background").setOrigin(0.5,0.5).setDepth(-2);
+        this.background = this.add.sprite(0, 0,"background").setOrigin(0.5,0.5).setDepth(-2);
 
         this.player = new Player(this, playerStartPos.x, playerStartPos.y, "player").setOrigin(0.5, 0.5);
 

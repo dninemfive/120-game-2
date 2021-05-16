@@ -37,12 +37,12 @@ class Player extends Phaser.GameObjects.Sprite {
         // otherwise, player should be in the center of the screen and move the background instead
         let background = this.scene.background;
         let width = background.displayWidth / 2, height = background.displayHeight / 2,
-            screenWidth = game.config.width / 2, screenHeight = game.config.height / 2;
+            screenWidth = game.config.width, screenHeight = game.config.height / 2;
         if(this.pos.x < (-width + screenWidth)){
         } else if(this.pos.x > (width - screenWidth)){
         } else{
             this.x = game.config.width / 2;
-            this.scene.background.x = -this.pos.x;
+            background.x = -this.pos.x;
         }
     }
 }
