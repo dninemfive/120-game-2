@@ -5,6 +5,8 @@ let config = {
     scene: [Menu, Level1, Instructions],
 }
 
+let playerScale = 0.06;
+
 //blinking text, credit: https://www.stephengarside.co.uk/blog/phaser-3-flashing-text-easy-example/
 class TweenHelper {
     static flashElement(scene, element, repeat = true, easing = 'Linear', overallDuration = 1500, visiblePauseDuration = 500) {
