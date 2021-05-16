@@ -45,7 +45,9 @@ class Player extends Phaser.GameObjects.Sprite {
     updateCoord(name, backgroundSize, screenSize){
         let background = this.scene.background;
         if(this.pos[name] < (-backgroundSize + screenSize)){
+            this[name] = this.pos[name] - (screenSize / 2) + backgroundSize;
         } else if(this.pos[name] > (backgroundSize - screenSize)){
+            this[name] = this.pos[name];
         } else{
             this[name] = screenSize / 2;
             background[name] = -this.pos[name];
