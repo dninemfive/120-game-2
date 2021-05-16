@@ -35,14 +35,20 @@ class Player extends Phaser.GameObjects.Sprite {
     updateScreenPosition(){
         // if edges of background would be visible, move player on the screen instead to keep them in boundaries
         // otherwise, player should be in the center of the screen and move the background instead
+        let background = this.scene.background;     
+        this.updateCoord('x', background.displayWidth / 2, game.config.width);
+        this.updateCoord('y', background.displayHeight / 2, game.config.height);
+        
+    }
+
+    // performs the update for one dimension at a time. for example, updateCoord('x') updates the x dimension
+    updateCoord(name, backgroundSize, screenSize){
         let background = this.scene.background;
-        let width = background.displayWidth / 2, height = background.displayHeight / 2,
-            screenWidth = game.config.width, screenHeight = game.config.height / 2;
-        if(this.pos.x < (-width + screenWidth)){
-        } else if(this.pos.x > (width - screenWidth)){
+        if(this.pos[name] < (-backgroundSize + screenSize)){
+        } else if(this.pos[name] > (backgroundSize - screenSize)){
         } else{
-            this.x = game.config.width / 2;
-            background.x = -this.pos.x;
+            this[name] = screenSize / 2;
+            background[name] = -this.pos[name];
         }
     }
 }
