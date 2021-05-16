@@ -5,6 +5,7 @@ class Level1 extends Phaser.Scene {
 
     preload() {
         this.load.image("background", "assets/TrailingLightsProtoBackground.png");
+        this.load.image("player", "assets/TrailingLightsProtoCharacter.png");
     }
 
     create() {
