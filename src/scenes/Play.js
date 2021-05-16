@@ -19,6 +19,6 @@ class Level1 extends Phaser.Scene {
     }
 
     update() {
-
+        this.player.update();
     }
 }
