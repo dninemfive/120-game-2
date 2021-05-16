@@ -5,11 +5,13 @@ class Player extends Phaser.GameObjects.Sprite {
         // an internal position vector, as opposed to x and y, which are the screen position
         this.pos = new Phaser.Math.Vector2(playerStartPos);
         console.log("playerStartPos: " + playerStartPos.x + " pos: " + this.pos.x);
+        this.printed = false;
     }
 
     update() {
         // To do simple 8-way movement without diagonal speed exploit, we simply add components to a vector then set its max distance to move speed
         let velocity = new Phaser.Math.Vector2(0, 0);
+        if(!this.printed) console.log("before: " + velocity.x);
         if (keyLeft.isDown) { // todo: checks here to make sure you can't move past the boundary part of the texture
             velocity.x -= playerSpeed;
         }
@@ -22,8 +24,11 @@ class Player extends Phaser.GameObjects.Sprite {
         if (keyDown.isDown) {
             velocity.y += playerSpeed;
         }
+        if(!this.printed) console.log("mid: " + velocity.x);
         velocity = velocity.limit(playerSpeed);
-        this.pos += velocity;
+        if(!this.printed) console.log("after: " + velocity.x);
+        this.printed = true;
+        this.pos = this.pos.add(velocity);        
         this.updateScreenPosition();
     }
 
