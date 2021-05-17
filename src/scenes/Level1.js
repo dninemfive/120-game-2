@@ -15,6 +15,13 @@ class Level1 extends Phaser.Scene {
         this.player.setScale(playerScale);
 
         this.switches = new Set();
+        for(let i = 0; i < 5; i++){
+            let w = this.background.displayWidth / 2, h = this.background.displayHeight / 2;
+            let x = Phaser.Math.Between(-w, w), y = Phaser.Math.Between(-h, h);
+            this.switches.add(
+                new Switch(this, x, y, "switchOff").setOrigin(0.5, 0.5)
+            );
+        }
 
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -24,6 +31,6 @@ class Level1 extends Phaser.Scene {
 
     update() {
         this.player.update();
-        for(let s of switches) s.update();
+        for(let s of this.switches) s.update();
     }
 }
