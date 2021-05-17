@@ -14,6 +14,18 @@ class Level1 extends Phaser.Scene {
         this.player = new Player(this, 0, 0, "player").setOrigin(0.5, 0.5);
         this.player.setScale(playerScale);
 
+        let debugConfig = {
+            fontFamily: 'Century Gothic',
+            fontSize: '30px',
+            color: 'lime',
+            padding: {
+              top: 5,
+              bottom: 5,
+            },
+            fixedWidth: 0
+        }
+        this.debugCoords = this.add.text(game.config.width / 2, game.config.height, "asdf", debugConfig).setOrigin(0.5,1);
+
         this.switches = new Set();
         for(let i = 0; i < 5; i++){
             let w = this.background.displayWidth / 2, h = this.background.displayHeight / 2;
@@ -31,6 +43,10 @@ class Level1 extends Phaser.Scene {
 
     update() {
         this.player.update();
-        for(let s of this.switches) s.update();
+        for(let s of this.switches) s.update();        
+        this.debugCoords.text = "screen: (" + Math.round(this.player.x) + ", " + Math.round(this.player.y) + "); internal: (" + 
+                                 Math.round(this.player.pos.x) + ", " + Math.round(this.player.pos.y) + ")";
     }
+
+    
 }
