@@ -41,6 +41,9 @@ class Level1 extends Phaser.Scene {
             );
         }
 
+        //Change mute to true to work with audio layering. The tracks will
+        //start playing muted, then use muteToggle to add them in or out in
+        //order and as needed.
         let audioConfig = {
             mute : false,
             loop : true,
@@ -97,6 +100,33 @@ class Level1 extends Phaser.Scene {
                     this.track04.play();
                 }
             })
+        }
+    }
+
+    //This does exaclty what it sounds like. I was using this to layer audio
+    //in and out. If you want to play with that, the order doesn't really matter,
+    //but I wrote it to be track 1, 2, 3, then 4.
+    muteToggle(audio){
+        if(audio.mute == true){
+            audio.setMute(false);
+        }
+        else{
+            audio.setMute(true);
+        }
+    }
+
+    //The two functions play with the rate of playback, it detunes it, because
+    //of course it does, but it's one method of achieving the speed element to
+    //the sound effects.
+    rateUp(audio){
+        if(audio.rate < 3){
+            audio.rate += 0.1;
+        }
+    }
+
+    rateDown(audio){
+        if(audio.rate > 0.6){ //rounding errors means this is actually > 0.5
+            audio.rate -= 0.1;
         }
     }
 
