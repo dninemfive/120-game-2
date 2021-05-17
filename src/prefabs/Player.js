@@ -36,20 +36,18 @@ class Player extends Phaser.GameObjects.Sprite {
         let background = this.scene.background;
         this.returnPlayerToBounds(background.displayWidth / 4);
         this.updateCoord('x', background.displayWidth / 2, game.config.width);
-        this.updateCoord('y', background.displayHeight / 2, game.config.height);
-        
+        this.updateCoord('y', background.displayHeight / 2, game.config.height);        
     }
 
     // performs the update for one dimension at a time. for example, updateCoord('x') updates the x dimension
     updateCoord(dimension, backgroundSize, screenSize){
-        let background = this.scene.background;
         if(this.pos[dimension] < (-backgroundSize + screenSize)){
             this[dimension] = this.pos[dimension] - (screenSize / 2) + backgroundSize;
         } else if(this.pos[dimension] > (backgroundSize - screenSize)){
             this[dimension] = this.pos[dimension] + (1.5 * screenSize) - backgroundSize;
         } else{
             this[dimension] = screenSize / 2;
-            background[dimension] = -this.pos[dimension];
+            this.scene.background[dimension] = -this.pos[dimension];
         }
     }
 
