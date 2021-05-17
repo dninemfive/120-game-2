@@ -9,7 +9,7 @@ class Player extends Phaser.GameObjects.Sprite {
     update() {
         // To do simple 8-way movement without diagonal speed exploit, we simply add components to a vector then set its max distance to move speed
         let velocity = new Phaser.Math.Vector2(0, 0);
-        if (keyLeft.isDown) { // todo: checks here to make sure you can't move past the boundary part of the texture
+        if (keyLeft.isDown) {
             velocity.x -= playerSpeed;
         }
         if (keyRight.isDown) {
@@ -25,7 +25,7 @@ class Player extends Phaser.GameObjects.Sprite {
         velocity = velocity.limit(playerSpeed);
         this.printed = true;
         this.pos = this.pos.add(velocity);
-        if(isDebugTick) console.log("position: (" + this.pos.x + ", " + this.pos.y + ")");
+        //if(isDebugTick) console.log("position: (" + this.pos.x + ", " + this.pos.y + ")");
         velocity = this.keepPlayerInBounds(velocity, this.scene.background.displayWidth / 4);
         this.updateScreenPosition();
     }
@@ -82,11 +82,9 @@ class Player extends Phaser.GameObjects.Sprite {
         if(typeof vector === 'undefined') vector = new Phaser.Math.Vector2(0, 0);
         if(boundary < 0){
             let result = this.pos[dimension] + vector[dimension] < boundary;
-            if(isDebugTick) console.log("wtpoob(" + dimension + ", " + vector[dimension] + ", " + boundary + ") = " + result);
             return result;
         } else {
             let result = this.pos[dimension] + vector[dimension] > boundary;
-            if(isDebugTick) console.log("wtpoob(" + dimension + ", " + vector[dimension] + ", " + boundary + ") = " + result);
             return result;
         }
         

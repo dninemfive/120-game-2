@@ -59,11 +59,11 @@ let borderPadding = borderUISize / 3;
 
 let keyLeft, keyRight, keyUp, keyDown, keyI, keyEsc, keySpace;
 
-let debugCounter = 0, isDebugTick = true;
-
-let borderWidth = 0;
-
 // globals
 let mapDims = {width: 4000, height: 4000 },
     playerStartPos = {x: 0, y: 0},
-    playerSpeed = 10;
+    playerSpeed = 10,
+    borderWidth = 0;
+
+// debug globals
+let debugCounter = 0, isDebugTick = true;
