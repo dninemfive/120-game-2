@@ -10,6 +10,7 @@ class Level1 extends Phaser.Scene {
 
     create() {
         this.background = this.add.sprite(0, 0,"background").setOrigin(0.5,0.5).setDepth(-2);
+        this.background.setScale(1.5);
 
         this.player = new Player(this, 0, 0, "player").setOrigin(0.5, 0.5);
         this.player.setScale(playerScale);
@@ -25,11 +26,12 @@ class Level1 extends Phaser.Scene {
             fixedWidth: 0
         }
         this.debugCoords = this.add.text(game.config.width / 2, game.config.height, "asdf", debugConfig).setOrigin(0.5,1);
+        console.log(this.background.displayWidth + "; " + this.background.displayHeight);
 
         this.switches = new Set();
         for(let i = 0; i < 5; i++){
             let w = this.background.displayWidth / 2, h = this.background.displayHeight / 2;
-            let x = Phaser.Math.Between(-w, w), y = Phaser.Math.Between(-h, h);
+            let x = Phaser.Math.Between(0, w), y = Phaser.Math.Between(0, h);
             this.switches.add(
                 new Switch(this, x, y, "switchOff").setOrigin(0.5, 0.5)
             );
