@@ -48,6 +48,7 @@ class Instructions extends Phaser.Scene {
     update() {
         if (Phaser.Input.Keyboard.JustDown(keyEsc)) {
             this.scene.start("Menu");
+            musicPlaying = true;
         }
     }
 

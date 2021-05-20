@@ -6,6 +6,7 @@ let config = {
 }
 
 let playerScale = 0.06;
+let musicPlaying = false;
 
 //blinking text, credit: https://www.stephengarside.co.uk/blog/phaser-3-flashing-text-easy-example/
 class TweenHelper {

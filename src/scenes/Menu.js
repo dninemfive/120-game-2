@@ -11,7 +11,9 @@ class Menu extends Phaser.Scene {
     create() {
         
         this.menumusic = this.sound.add("MenuTheme", { loop: true });
-        this.menumusic.play();
+        if (musicPlaying == false) {
+            this.menumusic.play();
+        }
 
         let menuConfig = {
             fontFamily: 'Century Gothic',
@@ -63,7 +65,6 @@ class Menu extends Phaser.Scene {
 
         if(Phaser.Input.Keyboard.JustDown(keyI)) {
             this.scene.start("Instructions");
-            this.menumusic.stop();
         }
     }
 }
