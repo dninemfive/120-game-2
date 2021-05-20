@@ -4,11 +4,15 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
+        this.load.audio("MenuTheme", "assets/TrailingLightsMenuTheme.ogg");
 
     }
 
     create() {
         
+        this.menumusic = this.sound.add("MenuTheme", { loop: true });
+        this.menumusic.play();
+
         let menuConfig = {
             fontFamily: 'Century Gothic',
             fontSize: '150px',
@@ -51,12 +55,15 @@ class Menu extends Phaser.Scene {
     }
 
     update() {
+
         if (Phaser.Input.Keyboard.JustDown(keySpace)) {
             this.scene.start("Level1");
+            this.menumusic.stop();
         }
 
         if(Phaser.Input.Keyboard.JustDown(keyI)) {
             this.scene.start("Instructions");
+            this.menumusic.stop();
         }
     }
 }
