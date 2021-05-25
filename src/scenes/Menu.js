@@ -64,7 +64,7 @@ class Menu extends Phaser.Scene {
         }
 
         if(Phaser.Input.Keyboard.JustDown(keyI)) {
-            this.scene.start("Instructions");
+            this.scene.start("Instructions"); 
         }
     }
 }
