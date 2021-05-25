@@ -5,7 +5,7 @@ let config = {
     scene: [Menu, Level1, Instructions],
 }
 
-let playerScale = 0.6;
+let playerScale = 0.1;
 let musicPlaying = false;
 
 //blinking text, credit: https://www.stephengarside.co.uk/blog/phaser-3-flashing-text-easy-example/

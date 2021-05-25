@@ -4,16 +4,21 @@ class Level1 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image("background", "assets/TrailingLightsProtoBackground.png");
+        this.load.image("background", "assets/FirstLevelBackground.jpg");
         this.load.image("player", "assets/TrailingLightsProtoCharacter.png");
         this.load.audio('Temp01', './assets/TLTest1.wav');
         this.load.audio('Temp02', './assets/TLTest2.wav');
         this.load.audio('Temp03', './assets/TLTest3.wav');
         this.load.audio('Temp04', './assets/TLTest4.wav');
+        this.load.audio('Ambience', './assets/Background Ambience.wav');
     }
 
     create() {
-        this.background = this.add.sprite(0, 0,"background").setOrigin(0.5,0.5).setDepth(-2);
+        this.ambience = this.sound.add("Ambience", { loop: true });
+        this.ambience.play();
+
+            
+        this.background = this.add.sprite(0, 0,"background").setOrigin(0.25,0.25).setDepth(-2);
         this.background.setScale(1.5);
 
         this.player = new Player(this, 0, 0, "player").setOrigin(0.5, 0.5);
