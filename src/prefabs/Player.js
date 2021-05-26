@@ -8,18 +8,26 @@ class Player extends Phaser.GameObjects.Sprite {
 
     update() {
         // To do simple 8-way movement without diagonal speed exploit, we simply add components to a vector then set its max distance to move speed
+        // Altered this ^^^ to allow 'flight' controls
+        // A and D now rotate the sprite, W and S move it foreward or backward
+        // relative to its orientation. This enables the core mechanic of knowing if you are facing
+        // the right direction.
         let velocity = new Phaser.Math.Vector2(0, 0);
         if (keyLeft.isDown) {
-            velocity.x -= playerSpeed;
+            //velocity.x -= playerSpeed;
+            this.rotation -= 0.1;
         }
         if (keyRight.isDown) {
-            velocity.x += playerSpeed;
+            //velocity.x += playerSpeed;
+            this.rotation += 0.1;
         }
         if (keyUp.isDown) {
-            velocity.y -= playerSpeed;
+            //velocity.y -= playerSpeed;
+            velocity.setToPolar(this.rotation, playerSpeed);
         }
         if (keyDown.isDown) {
-            velocity.y += playerSpeed;
+            //velocity.y += playerSpeed;
+            velocity.setToPolar(this.rotation, (-1*playerSpeed));
         }
         isDebugTick = (++debugCounter) % 1000 == 0;
         velocity = velocity.limit(playerSpeed);

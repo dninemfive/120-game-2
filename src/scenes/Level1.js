@@ -16,7 +16,22 @@ class Level1 extends Phaser.Scene {
     create() {
         this.ambience = this.sound.add("Ambience", { loop: true });
         this.ambience.play();
+        
+        //Change mute to true to work with audio layering. The tracks will
+        //start playing muted, then use muteToggle to add them in or out in
+        //order and as needed.
+        let audioConfig = {
+            mute : false,
+            loop : true,
+            volume: 0.5
+        }
+        this.track01 = this.sound.add('Temp01', audioConfig);
+        this.track02 = this.sound.add('Temp02', audioConfig);
+        this.track03 = this.sound.add('Temp03', audioConfig);
+        this.track04 = this.sound.add('Temp04', audioConfig);
+        this.isPlaying = false;
 
+        //this.startTheMusic();
             
         this.background = this.add.sprite(0, 0,"background").setOrigin(0.25,0.25).setDepth(-2);
         this.background.setScale(1.5);
@@ -45,19 +60,6 @@ class Level1 extends Phaser.Scene {
                 new Switch(this, x, y, "switchOff").setOrigin(0.5, 0.5)
             );
         }
-
-        //Change mute to true to work with audio layering. The tracks will
-        //start playing muted, then use muteToggle to add them in or out in
-        //order and as needed.
-        let audioConfig = {
-            mute : false,
-            loop : true,
-            volume: 0.5
-        }
-        this.track01 = this.sound.add('Temp01', audioConfig);
-        this.track02 = this.sound.add('Temp02', audioConfig);
-        this.track03 = this.sound.add('Temp03', audioConfig);
-        this.track04 = this.sound.add('Temp04', audioConfig);
 
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);

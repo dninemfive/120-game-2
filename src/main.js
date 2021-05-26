@@ -3,6 +3,10 @@ let config = {
     width: window.innerWidth - 30,
     height: window.innerHeight - 15,
     scene: [Menu, Level1, Instructions],
+    physics: {
+        default: 'arcade',
+        arcade: {debug:true}
+    }
 }
 
 let playerScale = 0.1;
