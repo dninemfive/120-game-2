@@ -5,17 +5,23 @@ class Level1 extends Phaser.Scene {
 
     preload() {
         this.load.image("background", "assets/FirstLevelBackground.jpg");
-        this.load.image("player", "assets/TrailingLightsProtoCharacter.png");
+        this.load.image("switch", "assets/SwitchOff.png");
         this.load.audio('Temp01', './assets/TLTest1.wav');
         this.load.audio('Temp02', './assets/TLTest2.wav');
         this.load.audio('Temp03', './assets/TLTest3.wav');
         this.load.audio('Temp04', './assets/TLTest4.wav');
         this.load.audio('Ambience', './assets/Background Ambience.wav');
+        this.load.spritesheet("playerside", "assets/Flame.png", { frameWidth: 1024, frameHeight: 1024, startFrame: 0, endFrame: 1});
     }
 
     create() {
         this.ambience = this.sound.add("Ambience", { loop: true });
         this.ambience.play();
+
+        this.player = new Player(this, game.config.width / 2, -100, "playerside").setOrigin(0.5, 0.5);
+        this.player.setScale(playerScale);
+        this.anims.create({ key: "playerside", frames: this.anims.generateFrameNumbers("playerside", { start: 0, end: 1, first: 0}), frameRate: 12, repeat: -1 });
+        this.player.anims.play("playerside");
         
         //Change mute to true to work with audio layering. The tracks will
         //start playing muted, then use muteToggle to add them in or out in
@@ -36,9 +42,6 @@ class Level1 extends Phaser.Scene {
         this.background = this.add.sprite(0, 0,"background").setOrigin(0.25,0.25).setDepth(-2);
         this.background.setScale(1.5);
 
-        this.player = new Player(this, 0, 0, "player").setOrigin(0.5, 0.5);
-        this.player.setScale(playerScale);
-
         let debugConfig = {
             fontFamily: 'Century Gothic',
             fontSize: '30px',
@@ -57,7 +60,7 @@ class Level1 extends Phaser.Scene {
             let w = this.background.displayWidth / 2, h = this.background.displayHeight / 2;
             let x = Phaser.Math.Between(0, w), y = Phaser.Math.Between(0, h);
             this.switches.add(
-                new Switch(this, x, y, "switchOff").setOrigin(0.5, 0.5)
+                new Switch(this, x, y, "SwitchOff").setOrigin(0.5, 0.5)
             );
         }
 
