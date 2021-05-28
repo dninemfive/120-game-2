@@ -11,7 +11,7 @@ class Level1 extends Phaser.Scene {
         this.load.audio('Temp03', './assets/TLTest3.wav');
         this.load.audio('Temp04', './assets/TLTest4.wav');
         this.load.audio('Ambience', './assets/Background Ambience.wav');
-        this.load.spritesheet("playerside", "assets/Flame.png", { frameWidth: 1024, frameHeight: 1024, startFrame: 0, endFrame: 1});
+        this.load.spritesheet("playerside", "assets/Flame.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
     }
 
     create() {
