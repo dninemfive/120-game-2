@@ -52,12 +52,12 @@ class Level1 extends Phaser.Scene {
             },
             fixedWidth: 0
         }
-        this.debugCoords = this.add.text(game.config.width / 2, game.config.height, "asdf", debugConfig).setOrigin(0.5,1);
-        this.debugCoords2 = this.add.text(game.config.width / 2, game.config.height - 40, "asdf", debugConfig).setOrigin(0.5,1);
-        console.log(this.background.displayWidth + "; " + this.background.displayHeight);
+        //this.debugCoords = this.add.text(game.config.width / 2, game.config.height, "asdf", debugConfig).setOrigin(0.5,1);
+        //this.debugCoords2 = this.add.text(game.config.width / 2, game.config.height - 40, "asdf", debugConfig).setOrigin(0.5,1);
+        //console.log(this.background.displayWidth + "; " + this.background.displayHeight);
 
         this.switches = new Set();
-        //for(let i = 0; i < 5; i++){
+        //for(let i = 0; i < 5; i++){aaaaaa
         //    let w = this.background.displayWidth / 2, h = this.background.displayHeight / 2;
         //    let x = Phaser.Math.Between(0, w), y = Phaser.Math.Between(0, h);
         //    this.switches.add(
@@ -79,9 +79,9 @@ class Level1 extends Phaser.Scene {
             s.update();
             sw = s;
         }        
-        this.debugCoords.text = "screen: (" + Math.round(this.player.x) + ", " + Math.round(this.player.y) + "); internal: (" + 
+        //this.debugCoords.text = "screen: (" + Math.round(this.player.x) + ", " + Math.round(this.player.y) + "); internal: (" + 
                                  Math.round(this.player.pos.x) + ", " + Math.round(this.player.pos.y) + ")";
-        this.debugCoords2.text = "your pos - switch pos = (" + (this.player.pos.x - sw.pos.x) + ", " + (this.player.pos.y - sw.pos.y) + ")";
+        //this.debugCoords2.text = "your pos - switch pos = (" + (this.player.pos.x - sw.pos.x) + ", " + (this.player.pos.y - sw.pos.y) + ")";
     }
 
 // Helper Functions ==================================
