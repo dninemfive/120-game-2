@@ -9,7 +9,6 @@ let config = {
     }
 }
 
-let playerScale = 0.1;
 let musicPlaying = false;
 
 //blinking text, credit: https://www.stephengarside.co.uk/blog/phaser-3-flashing-text-easy-example/
@@ -68,7 +67,9 @@ let keyLeft, keyRight, keyUp, keyDown, keyI, keyEsc, keySpace;
 let mapDims = {width: 4000, height: 4000 },
     playerStartPos = {x: 0, y: 0},
     playerSpeed = 10,
-    borderWidth = 0;
+    borderWidth = 0,
+    playerScale = 0.2,
+    switchScale = 0.3;
 
 // debug globals
 let debugCounter = 0, isDebugTick = true;
