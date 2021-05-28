@@ -57,13 +57,14 @@ class Level1 extends Phaser.Scene {
         console.log(this.background.displayWidth + "; " + this.background.displayHeight);
 
         this.switches = new Set();
-        for(let i = 0; i < 1; i++){
-            let w = this.background.displayWidth / 2, h = this.background.displayHeight / 2;
-            let x = Phaser.Math.Between(0, w), y = Phaser.Math.Between(0, h);
-            this.switches.add(
-                new Switch(this, x, y, "SwitchOff").setOrigin(0.5, 0.5)
-            );
-        }
+        //for(let i = 0; i < 5; i++){
+        //    let w = this.background.displayWidth / 2, h = this.background.displayHeight / 2;
+        //    let x = Phaser.Math.Between(0, w), y = Phaser.Math.Between(0, h);
+        //    this.switches.add(
+        //        new Switch(this, x, y, "SwitchOff").setOrigin(0.5, 0.5)
+        //    );
+        //}
+        this.switches.add(new Switch(this, 0, 0, "SwitchOff").setOrigin(0.5,0.5));
 
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);

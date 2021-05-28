@@ -2,7 +2,8 @@ class Switch extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
-        this.pos = {x: x, y: y};
+        this.pos = {x: x + this.scene.player.x,
+                    y: y - this.scene.player.y};
         console.log("Added switch at position " + x + ", " + y + ".");
 
         let debugConfig = {
