@@ -18,7 +18,7 @@ class Level1 extends Phaser.Scene {
         this.ambience = this.sound.add("Ambience", { loop: true });
         this.ambience.play();
 
-        this.player = new Player(this, game.config.width / 2, -100, "playerside").setOrigin(0.5, 0.5);
+        this.player = new Player(this, game.config.width / 2, -100, "playerside").setOrigin(0.5, 0.5).setDepth(1);
         this.player.setScale(playerScale);
         this.anims.create({ key: "playerside", frames: this.anims.generateFrameNumbers("playerside", { start: 0, end: 1, first: 0}), frameRate: 12, repeat: -1 });
         this.player.anims.play("playerside");
