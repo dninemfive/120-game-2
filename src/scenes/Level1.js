@@ -64,7 +64,7 @@ class Level1 extends Phaser.Scene {
         //        new Switch(this, x, y, "SwitchOff").setOrigin(0.5, 0.5)
         //    );
         //}
-        this.switches.add(new Switch(this, 0, 0, "SwitchOff").setOrigin(0.5,0.5));
+        this.switches.add(new Switch(this, 0, 0, "switch").setOrigin(0.5,0.5));
 
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
