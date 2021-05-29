@@ -63,7 +63,10 @@ class Level1 extends Phaser.Scene {
         //this.debugCoords2 = this.add.text(game.config.width / 2, game.config.height - 40, "asdf", debugConfig).setOrigin(0.5,1);
         //console.log(this.background.displayWidth + "; " + this.background.displayHeight);
 
-        this.switches = new Set();
+        this.switches = new Array();//new Set();
+        // We can change this ^ back if you want, but I find arrrays
+        // easier to access in this case, since I can just grab an index...
+        
         //for(let i = 0; i < 5; i++){aaaaaa
         //    let w = this.background.displayWidth / 2, h = this.background.displayHeight / 2;
         //    let x = Phaser.Math.Between(0, w), y = Phaser.Math.Between(0, h);
@@ -71,7 +74,8 @@ class Level1 extends Phaser.Scene {
         //        new Switch(this, x, y, "SwitchOff").setOrigin(0.5, 0.5)
         //    );
         //}
-        this.switches.add(new Switch(this, 0, 0, "switch").setOrigin(0.5,0.5).setScale(switchScale));
+        //this.switches.add(new Switch(this, 0, 0, "switch").setOrigin(0.5,0.5).setScale(switchScale));
+        this.switches[0] = new Switch(this, 0, 0, "switch").setOrigin(0.5,0.5).setScale(switchScale);
 
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -86,8 +90,8 @@ class Level1 extends Phaser.Scene {
         for(let s of this.switches) {
             s.update();
             sw = s;
-        }        
-        this.debugCoords.text = this.player.rotationInternal;
+        } 
+        this.debugCoords.text = this.angleBetweenSwitchAndPlayer();//this.player.rotationInternal;
         if(Phaser.Input.Keyboard.JustDown(key0)){
             this.startTheMusic();
         }
@@ -156,6 +160,14 @@ class Level1 extends Phaser.Scene {
         if(audio.rate > 0.6){ //rounding errors means this is actually > 0.5
             audio.rate -= 0.1;
         }
+    }
+
+    // Here to round up that ugly function in there and make it more obvious
+    // what it does.
+    angleBetweenSwitchAndPlayer(){
+        return Phaser.Math.Angle.Between((this.switches[0].pos.x - (game.config.width / 2)), 
+                                         (this.switches[0].pos.y - (game.config.height / 2)),
+                                         this.player.pos.x, this.player.pos.y);
     }
 
     
