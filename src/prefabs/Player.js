@@ -4,6 +4,8 @@ class Player extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
         // an internal position vector, as opposed to x and y, which are the screen position
         this.pos = new Phaser.Math.Vector2(playerStartPos);
+        this.rotationInternal = 0; // in radians, as specified here: https://photonstorm.github.io/phaser3-docs/Phaser.GameObjects.Sprite.html#rotation
+                                   // internal rotation is used to use the four-way sprite graphics instead
     }
 
     update() {
@@ -15,19 +17,20 @@ class Player extends Phaser.GameObjects.Sprite {
         let velocity = new Phaser.Math.Vector2(0, 0);
         if (keyLeft.isDown) {
             //velocity.x -= playerSpeed;
-            this.rotation -= 0.1;
+            this.rotationInternal -= 0.1;
         }
         if (keyRight.isDown) {
             //velocity.x += playerSpeed;
-            this.rotation += 0.1;
+            this.rotationInternal += 0.1;
         }
+        this.clampRotation();
         if (keyUp.isDown) {
             //velocity.y -= playerSpeed;
-            velocity.setToPolar(this.rotation, playerSpeed);
+            velocity.setToPolar(this.rotationInternal, playerSpeed);
         }
         if (keyDown.isDown) {
             //velocity.y += playerSpeed;
-            velocity.setToPolar(this.rotation, (-1*playerSpeed));
+            velocity.setToPolar(this.rotationInternal, (-1*playerSpeed));
         }
         isDebugTick = (++debugCounter) % 1000 == 0;
         velocity = velocity.limit(playerSpeed);
@@ -36,6 +39,7 @@ class Player extends Phaser.GameObjects.Sprite {
         //if(isDebugTick) console.log("position: (" + this.pos.x + ", " + this.pos.y + ")");
         velocity = this.keepPlayerInBounds(velocity, this.scene.background.displayWidth / 4);
         this.updateScreenPosition();
+        this.updateGraphic();
     }
 
     updateScreenPosition(){
@@ -94,5 +98,30 @@ class Player extends Phaser.GameObjects.Sprite {
             return result;
         }
         
+    }
+
+    clampRotation(){
+        let tau = Phaser.Math.PI2;
+        if(this.rotationInternal < 0) {
+            this.rotationInternal += tau;
+        }
+        if(this.rotationInternal >= tau) {
+            this.rotationInternal -= tau;
+        }
+    }
+
+    updateGraphic(){
+        let halfpi = Phaser.Math.TAU; // DEAR PHASER: THIS IS NOT WHAT TAU IS
+        if(this.rotationInternal < halfpi) {
+            this.anims.play("playerside");
+            this.setFlip(false, false);
+        } else if(this.rotationInternal < Math.PI) {
+            this.anims.play("playerback");
+        } else if(this.rotationInternal < Math.PI + halfpi) {
+            this.anims.play("playerside");
+            this.setFlip(true, false);
+        } else {
+            this.anims.play("playerfront");
+        }
     }
 }

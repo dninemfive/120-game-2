@@ -12,15 +12,20 @@ class Level1 extends Phaser.Scene {
         this.load.audio('Temp04', './assets/TLTest4.wav');
         this.load.audio('Ambience', './assets/Background Ambience.wav');
         this.load.spritesheet("playerside", "assets/Flame.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
+        this.load.spritesheet("playerback", "assets/FlameBack.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
+        this.load.spritesheet("playerfront", "assets/FlameFront.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
     }
 
     create() {
         this.ambience = this.sound.add("Ambience", { loop: true });
         this.ambience.play();
 
-        this.player = new Player(this, game.config.width / 2, -100, "playerside").setOrigin(0.5, 0.5).setDepth(1);
-        this.player.setScale(playerScale);
         this.anims.create({ key: "playerside", frames: this.anims.generateFrameNumbers("playerside", { start: 0, end: 1, first: 0}), frameRate: 12, repeat: -1 });
+        this.anims.create({ key: "playerback", frames: this.anims.generateFrameNumbers("playerback", { start: 0, end: 1, first: 0}), frameRate: 12, repeat: -1 });
+        this.anims.create({ key: "playerfront", frames: this.anims.generateFrameNumbers("playerfront", { start: 0, end: 1, first: 0}), frameRate: 12, repeat: -1 });
+
+        this.player = new Player(this, game.config.width / 2, -100, "playerside").setOrigin(0.5, 0.5).setDepth(1);
+        this.player.setScale(playerScale);        
         this.player.anims.play("playerside");
         
         //Change mute to true to work with audio layering. The tracks will
@@ -52,7 +57,7 @@ class Level1 extends Phaser.Scene {
             },
             fixedWidth: 0
         }
-        //this.debugCoords = this.add.text(game.config.width / 2, game.config.height, "asdf", debugConfig).setOrigin(0.5,1);
+        this.debugCoords = this.add.text(game.config.width / 2, game.config.height, "asdf", debugConfig).setOrigin(0.5,1);
         //this.debugCoords2 = this.add.text(game.config.width / 2, game.config.height - 40, "asdf", debugConfig).setOrigin(0.5,1);
         //console.log(this.background.displayWidth + "; " + this.background.displayHeight);
 
@@ -79,8 +84,7 @@ class Level1 extends Phaser.Scene {
             s.update();
             sw = s;
         }        
-        //this.debugCoords.text = "screen: (" + Math.round(this.player.x) + ", " + Math.round(this.player.y) + "); internal: (" + 
-                                 Math.round(this.player.pos.x) + ", " + Math.round(this.player.pos.y) + ")";
+        this.debugCoords.text = this.player.rotationInternal;
         //this.debugCoords2.text = "your pos - switch pos = (" + (this.player.pos.x - sw.pos.x) + ", " + (this.player.pos.y - sw.pos.y) + ")";
     }
 
