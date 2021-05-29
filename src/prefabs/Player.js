@@ -16,21 +16,25 @@ class Player extends Phaser.GameObjects.Sprite {
         // the right direction.
         let velocity = new Phaser.Math.Vector2(0, 0);
         if (keyLeft.isDown) {
-            velocity.x -= playerSpeed;
+            //velocity.x -= playerSpeed;
             //this.rotationInternal -= 0.01;
+            this.rotation -= 0.05;
         }
         if (keyRight.isDown) {
-            velocity.x += playerSpeed;
+            //velocity.x += playerSpeed;
             //this.rotationInternal += 0.01;
+            this.rotation += 0.05;
         }
         this.clampRotation();
         if (keyUp.isDown) {
-            velocity.y -= playerSpeed;
+            //velocity.y -= playerSpeed;
             //velocity.setToPolar(this.rotationInternal, playerSpeed);
+            velocity.setToPolar(this.rotation, playerSpeed);
         }
         if (keyDown.isDown) {
-            velocity.y += playerSpeed;
+            //velocity.y += playerSpeed;
             //velocity.setToPolar(this.rotationInternal, (-1*playerSpeed));
+            velocity.setToPolar(this.rotation, (-1*playerSpeed));
         }
         isDebugTick = (++debugCounter) % 1000 == 0;
         velocity = velocity.limit(playerSpeed);
@@ -39,7 +43,7 @@ class Player extends Phaser.GameObjects.Sprite {
         //if(isDebugTick) console.log("position: (" + this.pos.x + ", " + this.pos.y + ")");
         velocity = this.keepPlayerInBounds(velocity, this.scene.background.displayWidth / 4);
         this.updateScreenPosition();
-        this.updateGraphic();
+        //this.updateGraphic();
     }
 
     updateScreenPosition(){
