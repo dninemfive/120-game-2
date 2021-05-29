@@ -42,7 +42,9 @@ class Level1 extends Phaser.Scene {
         this.track04 = this.sound.add('Temp04', audioConfig);
         this.isPlaying = false;
 
+        // \/ not starting correctly
         //this.startTheMusic();
+        // I'm trying to work it out, but for now just press '0' to start the audio
             
         this.background = this.add.sprite(0, 0,"background").setOrigin(0.25,0.25).setDepth(-2);
         this.background.setScale(1.5);
@@ -75,6 +77,7 @@ class Level1 extends Phaser.Scene {
         keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        key0 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ZERO);
     }
 
     update() {
@@ -85,7 +88,11 @@ class Level1 extends Phaser.Scene {
             sw = s;
         }        
         this.debugCoords.text = this.player.rotationInternal;
+        if(Phaser.Input.Keyboard.JustDown(key0)){
+            this.startTheMusic();
+        }
         //this.debugCoords2.text = "your pos - switch pos = (" + (this.player.pos.x - sw.pos.x) + ", " + (this.player.pos.y - sw.pos.y) + ")";
+
     }
 
 // Helper Functions ==================================
