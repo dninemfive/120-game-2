@@ -92,11 +92,38 @@ class Level1 extends Phaser.Scene {
             s.update();
             sw = s;
         } 
-        this.debugCoords.text = this.angleTest();//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
+        this.debugCoords.text = this.angleTestText();//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
         if(Phaser.Input.Keyboard.JustDown(key0)){
             this.startTheMusic();
         }
-        //console.log("player facing " + this.playerOppositeAngle() + ", angle between " + this.angleBetweenSwitchAndPlayer());
+        this.angleTest(this.track01, this.track02, this.track03, this.track04);
+
+/*
+        var PI_OVER_SEVEN = Math.PI / 7;
+        let theta = 0;
+        // Subtract the larger angle from the smaller to get the absolute difference
+        if(this.player.rotation > this.angleBetweenSwitchAndPlayer()){
+            theta = this.player.rotation - this.angleBetweenSwitchAndPlayer();
+        }
+        else{
+            theta = this.angleBetweenSwitchAndPlayer() - this.player.rotation;
+        }
+
+        // Subtract half the circle to get the angle compliment
+        theta -= Math.PI;
+        // Get the absolute value for comparison
+        theta = Math.abs(theta);
+
+        if(theta < PI_OVER_SEVEN){
+            this.track01.setMute(false);
+        }
+        else if(theta < (5*PI_OVER_SEVEN)){
+            this.track01.setMute(true);
+        }
+        else{
+
+        }*/
+        //this.angleTest(this.track01, this.track02, this.track03, this.track04);
         //this.debugCoords2.text = "your pos - switch pos = (" + (this.player.pos.x - sw.pos.x) + ", " + (this.player.pos.y - sw.pos.y) + ")";
 
     }
@@ -180,8 +207,13 @@ class Level1 extends Phaser.Scene {
         return this.player.rotation - Math.PI;
     }
 
-    angleTest(){
-        var PI_OVER_SEVEN = Math.PI / 7;
+    // This function is responsible for governing the musical layering based on the
+    // rotation of the player vs the angle between the player and the target switch.
+    // That is, it tells you if you're facing the right direction by turning the
+    // background music on or off.
+    // (This took me disturbingly long to figure out)
+    angleTest(audio1, audio2, audio3, audio4){
+        var PI_OVER_SEVEN = Math.PI / 11;
         let theta = 0;
         // Subtract the larger angle from the smaller to get the absolute difference
         if(this.player.rotation > this.angleBetweenSwitchAndPlayer()){
@@ -197,14 +229,48 @@ class Level1 extends Phaser.Scene {
         theta = Math.abs(theta);
 
         if(theta < PI_OVER_SEVEN){
-            return "0";
+            audio1.setMute(false);
+            audio2.setMute(false);
+            audio3.setMute(false);
+            audio4.setMute(false);
         }
-        else if(theta < (5*PI_OVER_SEVEN)){
-            return "1";
+        else if(theta < (9*PI_OVER_SEVEN)){
+            audio1.setMute(false);
+            audio2.setMute(false);
+            audio3.setMute(true);
+            audio4.setMute(true);
         }
-        return "2";
-        
+        else{
+            audio1.setMute(false);
+            audio2.setMute(true);
+            audio3.setMute(true);
+            audio4.setMute(true);
+        }
+    }
 
+    angleTestText(){
+        var PI_OVER_SEVEN = Math.PI / 11;
+        let theta = 0;
+        // Subtract the larger angle from the smaller to get the absolute difference
+        if(this.player.rotation > this.angleBetweenSwitchAndPlayer()){
+            theta = this.player.rotation - this.angleBetweenSwitchAndPlayer();
+        }
+        else{
+            theta = this.angleBetweenSwitchAndPlayer() - this.player.rotation;
+        }
+
+        // Subtract half the circle to get the angle compliment
+        theta -= Math.PI;
+        // Get the absolute value for comparison
+        theta = Math.abs(theta);
+
+        if(theta < PI_OVER_SEVEN){
+            return 0;
+        }
+        else if(theta < (9*PI_OVER_SEVEN)){
+            return 1;
+        }
+        return 2;
     }
     
 }
