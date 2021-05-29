@@ -17,11 +17,11 @@ class Player extends Phaser.GameObjects.Sprite {
         let velocity = new Phaser.Math.Vector2(0, 0);
         if (keyLeft.isDown) {
             //velocity.x -= playerSpeed;
-            this.rotationInternal -= 0.1;
+            this.rotationInternal -= 0.01;
         }
         if (keyRight.isDown) {
             //velocity.x += playerSpeed;
-            this.rotationInternal += 0.1;
+            this.rotationInternal += 0.01;
         }
         this.clampRotation();
         if (keyUp.isDown) {
@@ -111,13 +111,20 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     updateGraphic(){
-        let halfpi = Phaser.Math.TAU; // DEAR PHASER: THIS IS NOT WHAT TAU IS
-        if(this.rotationInternal < halfpi) {
+        /*
+        right: x <= pi / 4 || x > 7pi / 4
+        back:  x > pi / 4 && x <= 3pi / 4
+        left:  x > 3pi / 4 && x <= 5pi / 4
+        front: rest
+        */
+        let qpi = Math.PI / 4,
+            rot = this.rotationInternal;
+        if(rot <= qpi || rot > qpi * 7) {
             this.anims.play("playerside");
             this.setFlip(false, false);
-        } else if(this.rotationInternal < Math.PI) {
+        } else if(rot <= qpi * 3) {
             this.anims.play("playerback");
-        } else if(this.rotationInternal < Math.PI + halfpi) {
+        } else if(rot <= qpi * 5) {
             this.anims.play("playerside");
             this.setFlip(true, false);
         } else {
