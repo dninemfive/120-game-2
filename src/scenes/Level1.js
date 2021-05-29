@@ -32,6 +32,7 @@ class Level1 extends Phaser.Scene {
         //start playing muted, then use muteToggle to add them in or out in
         //order and as needed.
         let audioConfig = {
+            rate : 1,
             mute : false,
             loop : true,
             volume: 0.5
@@ -43,7 +44,7 @@ class Level1 extends Phaser.Scene {
         this.isPlaying = false;
 
         // \/ not starting correctly
-        //this.startTheMusic();
+        this.startTheMusic();
         // I'm trying to work it out, but for now just press '0' to start the audio
             
         this.background = this.add.sprite(0, 0,"background").setOrigin(0.25,0.25).setDepth(-2);
@@ -72,7 +73,7 @@ class Level1 extends Phaser.Scene {
         //    );
         //}
         //this.switches.add(new Switch(this, 0, 0, "switch").setOrigin(0.5,0.5).setScale(switchScale));
-        this.switches[0] = new Switch(this, 0, 0, "switch").setOrigin(0.5,0.5).setScale(switchScale);
+        this.switches[0] = new Switch(this, 500, -300, "switch").setOrigin(0.5,0.5).setScale(switchScale);
 
         this.debugCoords = this.add.text(game.config.width / 2, game.config.height, "asdf", debugConfig).setOrigin(0.5,1);
         //this.debugCoords2 = this.add.text(game.config.width / 2, game.config.height - 40, "asdf", debugConfig).setOrigin(0.5,1);
@@ -83,6 +84,10 @@ class Level1 extends Phaser.Scene {
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         key0 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ZERO);
+        keyLEFTARROW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keyRIGHTARROW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+
+        this.distCheck = this.distanceBetweenSwitchAndPlayer();
     }
 
     update() {
@@ -92,38 +97,25 @@ class Level1 extends Phaser.Scene {
             s.update();
             sw = s;
         } 
-        this.debugCoords.text = this.angleTestText();//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
+        this.debugCoords.text = "angle state: " + this.angleTestText() + ", distance: " + this.distanceBetweenSwitchAndPlayer();//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
         if(Phaser.Input.Keyboard.JustDown(key0)){
             this.startTheMusic();
         }
+        if(Phaser.Input.Keyboard.JustDown(keyRIGHTARROW)){
+            this.rateUp(this.track01);
+            this.rateUp(this.track02);
+            this.rateUp(this.track03);
+            this.rateUp(this.track04);
+        }
+        if(Phaser.Input.Keyboard.JustDown(keyLEFTARROW)){
+            this.rateDown(this.track01);
+            this.rateDown(this.track02);
+            this.rateDown(this.track03);
+            this.rateDown(this.track04);
+        }
         this.angleTest(this.track01, this.track02, this.track03, this.track04);
-
-/*
-        var PI_OVER_SEVEN = Math.PI / 7;
-        let theta = 0;
-        // Subtract the larger angle from the smaller to get the absolute difference
-        if(this.player.rotation > this.angleBetweenSwitchAndPlayer()){
-            theta = this.player.rotation - this.angleBetweenSwitchAndPlayer();
-        }
-        else{
-            theta = this.angleBetweenSwitchAndPlayer() - this.player.rotation;
-        }
-
-        // Subtract half the circle to get the angle compliment
-        theta -= Math.PI;
-        // Get the absolute value for comparison
-        theta = Math.abs(theta);
-
-        if(theta < PI_OVER_SEVEN){
-            this.track01.setMute(false);
-        }
-        else if(theta < (5*PI_OVER_SEVEN)){
-            this.track01.setMute(true);
-        }
-        else{
-
-        }*/
-        //this.angleTest(this.track01, this.track02, this.track03, this.track04);
+        this.distanceTest(this.track01, this.track02, this.track03, this.track04);
+        this.distCheck = this.distanceBetweenSwitchAndPlayer();
         //this.debugCoords2.text = "your pos - switch pos = (" + (this.player.pos.x - sw.pos.x) + ", " + (this.player.pos.y - sw.pos.y) + ")";
 
     }
@@ -142,21 +134,26 @@ class Level1 extends Phaser.Scene {
             this.track04.stop();
         }
         else{
-            this.track01.play();
             this.time.addEvent({
-                delay: 250,
+                delay: 1000,
+                callback: ()=>{
+                    this.track01.play();
+                }
+            })
+            this.time.addEvent({
+                delay: 1250,
                 callback: ()=>{
                     this.track03.play();
                 }
             })
             this.time.addEvent({
-                delay: 500,
+                delay: 1500,
                 callback: ()=>{
                     this.track02.play();
                 }
             })
             this.time.addEvent({
-                delay: 750,
+                delay: 1750,
                 callback: ()=>{
                     this.track04.play();
                 }
@@ -181,13 +178,13 @@ class Level1 extends Phaser.Scene {
     //the sound effects.
     rateUp(audio){
         if(audio.rate < 3){
-            audio.rate += 0.1;
+            audio.rate += 0.001;
         }
     }
 
     rateDown(audio){
         if(audio.rate > 0.6){ //rounding errors means this is actually > 0.5
-            audio.rate -= 0.1;
+            audio.rate -= 0.001;
         }
     }
 
@@ -229,7 +226,7 @@ class Level1 extends Phaser.Scene {
     *  /                                \
     */
     angleTest(audio1, audio2, audio3, audio4){
-        var PI_OVER_SEVEN = Math.PI / 11;
+        var PI_OVER_ELEVEN = Math.PI / 11;
         let theta = 0;
         // Subtract the larger angle from the smaller to get the absolute difference
         if(this.player.rotation > this.angleBetweenSwitchAndPlayer()){
@@ -244,13 +241,13 @@ class Level1 extends Phaser.Scene {
         // Get the absolute value for comparison
         theta = Math.abs(theta);
 
-        if(theta < PI_OVER_SEVEN){
+        if(theta < PI_OVER_ELEVEN){
             audio1.setMute(false);
             audio2.setMute(false);
             audio3.setMute(false);
             audio4.setMute(false);
         }
-        else if(theta < (9*PI_OVER_SEVEN)){
+        else if(theta < (9*PI_OVER_ELEVEN)){
             audio1.setMute(false);
             audio2.setMute(false);
             audio3.setMute(true);
@@ -265,7 +262,7 @@ class Level1 extends Phaser.Scene {
     }
 
     angleTestText(){
-        var PI_OVER_SEVEN = Math.PI / 11;
+        var PI_OVER_ELEVEN = Math.PI / 11;
         let theta = 0;
         // Subtract the larger angle from the smaller to get the absolute difference
         if(this.player.rotation > this.angleBetweenSwitchAndPlayer()){
@@ -280,13 +277,67 @@ class Level1 extends Phaser.Scene {
         // Get the absolute value for comparison
         theta = Math.abs(theta);
 
-        if(theta < PI_OVER_SEVEN){
+        if(theta < PI_OVER_ELEVEN){
             return 0;
         }
-        else if(theta < (9*PI_OVER_SEVEN)){
+        else if(theta < (9*PI_OVER_ELEVEN)){
             return 1;
         }
         return 2;
+    }
+
+    // Make our funky relation calculations look nice...
+    distanceBetweenSwitchAndPlayer(){
+        return Phaser.Math.Distance.Between((this.switches[0].pos.x - (game.config.width / 2)), 
+                                         (this.switches[0].pos.y - (game.config.height / 2)),
+                                         this.player.pos.x, this.player.pos.y);
+    }
+
+    distanceTest(audio1, audio2, audio3, audio4){
+        if(this.distanceBetweenSwitchAndPlayer() > this.distCheck){
+            this.rateDown(audio1);
+            this.rateDown(audio2);
+            this.rateDown(audio3);
+            this.rateDown(audio4);
+        }
+        else if(this.distanceBetweenSwitchAndPlayer() < this.distCheck){
+            this.rateUp(audio1);
+            this.rateUp(audio2);
+            this.rateUp(audio3);
+            this.rateUp(audio4);
+        }
+        /*
+        if(this.distanceBetweenSwitchAndPlayer() > 1500){
+            audio1.setRate(0.5);
+            audio2.setRate(0.5);
+            audio3.setRate(0.5);
+            audio4.setRate(0.5);
+        }
+        else if(this.distanceBetweenSwitchAndPlayer() > 1200){
+            audio1.setRate(0.75);
+            audio2.setRate(0.75);
+            audio3.setRate(0.75);
+            audio4.setRate(0.75);
+        }
+        else if(this.distanceBetweenSwitchAndPlayer() > 900){
+            audio1.setRate(1);
+            audio2.setRate(1);
+            audio3.setRate(1);
+            audio4.setRate(1);
+        }
+        else if(this.distanceBetweenSwitchAndPlayer() > 300){
+            audio1.setRate(1.5);
+            audio2.setRate(1.5);
+            audio3.setRate(1.5);
+            audio4.setRate(1.5);
+        }
+        else{
+            audio1.setRate(2);
+            audio2.setRate(2);
+            audio3.setRate(2);
+            audio4.setRate(2);
+        }
+        */
     }
     
 }

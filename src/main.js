@@ -61,7 +61,7 @@ let game = new Phaser.Game(config);
 let borderUISize = game.config.height / 15;
 let borderPadding = borderUISize / 3;
 
-let keyLeft, keyRight, keyUp, keyDown, keyI, keyEsc, keySpace, key0;
+let keyLeft, keyRight, keyUp, keyDown, keyI, keyEsc, keySpace, key0, keyLEFTARROW, keyRIGHTARROW;
 
 // globals
 let mapDims = {width: 4000, height: 4000 },
