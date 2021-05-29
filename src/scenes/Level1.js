@@ -211,7 +211,23 @@ class Level1 extends Phaser.Scene {
     // rotation of the player vs the angle between the player and the target switch.
     // That is, it tells you if you're facing the right direction by turning the
     // background music on or off.
-    // (This took me disturbingly long to figure out)
+    // (This took me embarassingly long to figure out)
+    /*
+    *            (All tracks on)
+    *               \      /
+    *               \      /      
+    *                \    /
+    *                \    /  (two tracks on)
+    * (two tracks on) \  /
+    *                 \  /
+    *                ------
+    *               |player|
+    *                ------
+    *              /        \
+    *          /                \
+    *      /     (one track on)     \             
+    *  /                                \
+    */
     angleTest(audio1, audio2, audio3, audio4){
         var PI_OVER_SEVEN = Math.PI / 11;
         let theta = 0;
