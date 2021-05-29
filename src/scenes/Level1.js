@@ -59,9 +59,6 @@ class Level1 extends Phaser.Scene {
             },
             fixedWidth: 0
         }
-        this.debugCoords = this.add.text(game.config.width / 2, game.config.height, "asdf", debugConfig).setOrigin(0.5,1);
-        //this.debugCoords2 = this.add.text(game.config.width / 2, game.config.height - 40, "asdf", debugConfig).setOrigin(0.5,1);
-        //console.log(this.background.displayWidth + "; " + this.background.displayHeight);
 
         this.switches = new Array();//new Set();
         // We can change this ^ back if you want, but I find arrrays
@@ -77,6 +74,10 @@ class Level1 extends Phaser.Scene {
         //this.switches.add(new Switch(this, 0, 0, "switch").setOrigin(0.5,0.5).setScale(switchScale));
         this.switches[0] = new Switch(this, 0, 0, "switch").setOrigin(0.5,0.5).setScale(switchScale);
 
+        this.debugCoords = this.add.text(game.config.width / 2, game.config.height, "asdf", debugConfig).setOrigin(0.5,1);
+        //this.debugCoords2 = this.add.text(game.config.width / 2, game.config.height - 40, "asdf", debugConfig).setOrigin(0.5,1);
+        //console.log(this.background.displayWidth + "; " + this.background.displayHeight);
+
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -91,10 +92,11 @@ class Level1 extends Phaser.Scene {
             s.update();
             sw = s;
         } 
-        this.debugCoords.text = this.angleBetweenSwitchAndPlayer();//this.player.rotationInternal;
+        this.debugCoords.text = this.angleTest();//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
         if(Phaser.Input.Keyboard.JustDown(key0)){
             this.startTheMusic();
         }
+        //console.log("player facing " + this.playerOppositeAngle() + ", angle between " + this.angleBetweenSwitchAndPlayer());
         //this.debugCoords2.text = "your pos - switch pos = (" + (this.player.pos.x - sw.pos.x) + ", " + (this.player.pos.y - sw.pos.y) + ")";
 
     }
@@ -170,5 +172,31 @@ class Level1 extends Phaser.Scene {
                                          this.player.pos.x, this.player.pos.y);
     }
 
+    // Finds the opposite angle of the direction the player is facing
+    playerOppositeAngle(){
+        if(this.player.rotation <= 0){
+            return this.player.rotation + Math.PI;
+        }
+        return this.player.rotation - Math.PI;
+    }
+
+    angleTest(){
+        var PI_OVER_ELEVEN = Math.PI / 7;
+        if(this.angleBetweenSwitchAndPlayer() >= 0){
+            if(((this.angleBetweenSwitchAndPlayer()+(PI_OVER_ELEVEN/2)) > this.playerOppositeAngle())
+               &&
+               ((this.angleBetweenSwitchAndPlayer()-(PI_OVER_ELEVEN/2)) < this.playerOppositeAngle())){
+                return true;
+            }
+            return false;
+        }
+        /*
+        if(((this.angleBetweenSwitchAndPlayer()+(PI_OVER_ELEVEN/2)) < this.playerOppositeAngle())
+               &&
+               ((this.angleBetweenSwitchAndPlayer()-(PI_OVER_ELEVEN/2)) > this.playerOppositeAngle())){
+                return true;
+            }
+            return false;*/
+    }
     
 }
