@@ -181,22 +181,30 @@ class Level1 extends Phaser.Scene {
     }
 
     angleTest(){
-        var PI_OVER_ELEVEN = Math.PI / 7;
-        if(this.angleBetweenSwitchAndPlayer() >= 0){
-            if(((this.angleBetweenSwitchAndPlayer()+(PI_OVER_ELEVEN/2)) > this.playerOppositeAngle())
-               &&
-               ((this.angleBetweenSwitchAndPlayer()-(PI_OVER_ELEVEN/2)) < this.playerOppositeAngle())){
-                return true;
-            }
-            return false;
+        var PI_OVER_SEVEN = Math.PI / 7;
+        let theta = 0;
+        // Subtract the larger angle from the smaller to get the absolute difference
+        if(this.player.rotation > this.angleBetweenSwitchAndPlayer()){
+            theta = this.player.rotation - this.angleBetweenSwitchAndPlayer();
         }
-        /*
-        if(((this.angleBetweenSwitchAndPlayer()+(PI_OVER_ELEVEN/2)) < this.playerOppositeAngle())
-               &&
-               ((this.angleBetweenSwitchAndPlayer()-(PI_OVER_ELEVEN/2)) > this.playerOppositeAngle())){
-                return true;
-            }
-            return false;*/
+        else{
+            theta = this.angleBetweenSwitchAndPlayer() - this.player.rotation;
+        }
+
+        // Subtract half the circle to get the angle compliment
+        theta -= Math.PI;
+        // Get the absolute value for comparison
+        theta = Math.abs(theta);
+
+        if(theta < PI_OVER_SEVEN){
+            return "0";
+        }
+        else if(theta < (5*PI_OVER_SEVEN)){
+            return "1";
+        }
+        return "2";
+        
+
     }
     
 }
