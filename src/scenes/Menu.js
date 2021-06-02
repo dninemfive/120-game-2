@@ -9,10 +9,10 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
+        console.log(musicPlaying);
         this.menumusic = this.sound.add("MenuTheme", { loop: true });
         if (musicPlaying == false) {
             this.menumusic.play();
-            musicPlaying == false;
         }
 
         let menuConfig = {
@@ -53,10 +53,16 @@ class Menu extends Phaser.Scene {
 
     
         keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
     }
 
     update() {
+
+        
+        if (Phaser.Input.Keyboard.JustDown(keyS)) {
+            this.menumusic.stop();
+        }
 
         if (Phaser.Input.Keyboard.JustDown(keySpace)) {
             this.menumusic.stop();

@@ -322,7 +322,7 @@ class Level1 extends Phaser.Scene {
             this.rateUp(audio3);
             this.rateUp(audio4);
         }
-        /*
+        
         if(this.distanceBetweenSwitchAndPlayer() > 1500){
             audio1.setRate(0.5);
             audio2.setRate(0.5);
@@ -353,7 +353,7 @@ class Level1 extends Phaser.Scene {
             audio3.setRate(2);
             audio4.setRate(2);
         }
-        */
+        
     }
     
 }

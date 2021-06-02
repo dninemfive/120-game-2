@@ -80,6 +80,7 @@ class EndCutscene extends Phaser.Scene {
     update() {
         this.timePast += 0.00695; //counts time
 
+        //cutscene transitions
         if (this.timePast > 3.5) {
             this.End2.alpha = 1;
         }
@@ -101,20 +102,18 @@ class EndCutscene extends Phaser.Scene {
             this.Success.alpha = 1;
         }
 
+        //links to other scenes
         if (Phaser.Input.Keyboard.JustDown(keyR)) {
             this.endingTheme.stop();
             this.scene.start("Level1");
-            //musicPlaying = true;
         }
         if (Phaser.Input.Keyboard.JustDown(keyEsc)) {
             this.endingTheme.stop();
             this.scene.start("Menu");
-            //musicPlaying = true;
         }
         if (Phaser.Input.Keyboard.JustDown(keyC)) {
             this.endingTheme.stop();
             this.scene.start("Credits");
-            //musicPlaying = true;
         }
     }
 
