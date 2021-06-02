@@ -42,7 +42,7 @@ class Instructions extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/1.38- borderUISize -
             borderPadding, 'Few foreigners have escaped the Musical Dimension, but those that have claim flipping all Safety Switches is key.', instructConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/1.25- borderUISize -
-            borderPadding, 'WASD to move, F to FLIP. Good luck.', instructConfig).setOrigin(0.5);
+            borderPadding, 'WS to move, AD to turn, F to FLIP. Good luck.', instructConfig).setOrigin(0.5);
         const commandReturn = this.add.text(game.config.width/2, game.config.height/1.15 - borderUISize -
             borderPadding, 'Press Esc to Return', instructConfig).setOrigin(0.5);
         
