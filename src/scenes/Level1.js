@@ -92,7 +92,7 @@ class Level1 extends Phaser.Scene {
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(key0)) {
+        if (Phaser.Input.Keyboard.JustDown(keyF)) {
             this.scene.start("EndCutscene");
             //musicPlaying = true;
         }
@@ -108,7 +108,7 @@ class Level1 extends Phaser.Scene {
             sw = s;
         } 
         this.debugCoords.text = "angle state: " + this.angleTestText() + ", distance: " + this.distanceBetweenSwitchAndPlayer();//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
-        if(Phaser.Input.Keyboard.JustDown(keyF)){
+        if(Phaser.Input.Keyboard.JustDown(key0)){
             this.startTheMusic();
         }
         if(Phaser.Input.Keyboard.JustDown(keyRIGHTARROW)){
