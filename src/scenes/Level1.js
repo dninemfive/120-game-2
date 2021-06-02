@@ -93,11 +93,17 @@ class Level1 extends Phaser.Scene {
 
     update() {
         if (Phaser.Input.Keyboard.JustDown(keyF)) {
+            this.ambience.stop();
+            this.track01.stop();
+            this.track02.stop();
+            this.track03.stop();
+            this.track04.stop();
             this.scene.start("EndCutscene");
             //musicPlaying = true;
         }
 
         if (playerWin == true) {
+            this.ambience.stop();
             this.scene.start("EndCustcene");
         }
 

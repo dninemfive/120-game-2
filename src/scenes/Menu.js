@@ -13,6 +13,7 @@ class Menu extends Phaser.Scene {
         this.menumusic = this.sound.add("MenuTheme", { loop: true });
         if (musicPlaying == false) {
             this.menumusic.play();
+            musicPlaying == false;
         }
 
         let menuConfig = {

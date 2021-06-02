@@ -9,9 +9,17 @@ class EndCutscene extends Phaser.Scene {
         this.load.image("End3", "assets/EndCutscenePage3.png");
         this.load.image("End4", "assets/EndCutscenePage4.png");
         this.load.image("End5", "assets/EndCutscenePage5.2.png");
+        this.load.audio('FinalSwitch', './assets/FinalSwitch.wav');
+        this.load.audio('EndTheme', './assets/EndTheme.wav');
     }
 
     create() {
+        this.finalswitch = this.sound.add("FinalSwitch", { loop: false });
+        this.finalswitch.play();
+        this.endingTheme = this.sound.add("EndTheme", { loop: false });
+        this.endingTheme.play();
+
+
         let EndConfig = {
             fontFamily: 'Century Gothic',
             fontSize: '26px',
@@ -45,6 +53,12 @@ class EndCutscene extends Phaser.Scene {
           this.End5.setScale(0.65);
           this.End5.alpha = 0;
 
+          this.LightTower = this.add.text(game.config.width/2, game.config.height/6 - borderUISize -
+            borderPadding, 'The Light Tower is just up ahead.', EndConfig).setOrigin(0.5);
+            this.LightTower.alpha = 0;
+            this.Success = this.add.text(game.config.width/2, game.config.height/4.5 - borderUISize -
+                borderPadding, 'You made it!', EndConfig).setOrigin(0.5);
+                this.Success.alpha = 0;
         this.commandEscape = this.add.text(game.config.width/3.5, game.config.height/2- borderUISize -
             borderPadding, 'Press Esc to Return to Main Title', EndConfig).setOrigin(0.5);
             this.commandEscape.alpha = 0;
@@ -66,34 +80,39 @@ class EndCutscene extends Phaser.Scene {
     update() {
         this.timePast += 0.00695; //counts time
 
-        if (this.timePast > 3) {
+        if (this.timePast > 3.5) {
             this.End2.alpha = 1;
         }
 
-        if (this.timePast > 8) {
+        if (this.timePast > 7) {
             this.End3.alpha = 1;
         }
 
-        if (this.timePast > 15) {
+        if (this.timePast > 14) {
             this.End4.alpha = 1;
         }
 
-        if (this.timePast > 20) {
+        if (this.timePast > 18.5) {
             this.End5.alpha = 1;
             this.commandEscape.alpha = 1;
             this.commandRestart.alpha = 1;
             this.commandCredits.alpha = 1;
+            this.LightTower.alpha = 1;
+            this.Success.alpha = 1;
         }
 
         if (Phaser.Input.Keyboard.JustDown(keyR)) {
+            this.endingTheme.stop();
             this.scene.start("Level1");
             //musicPlaying = true;
         }
         if (Phaser.Input.Keyboard.JustDown(keyEsc)) {
+            this.endingTheme.stop();
             this.scene.start("Menu");
             //musicPlaying = true;
         }
         if (Phaser.Input.Keyboard.JustDown(keyC)) {
+            this.endingTheme.stop();
             this.scene.start("Credits");
             //musicPlaying = true;
         }
