@@ -48,7 +48,7 @@ class Level1 extends Phaser.Scene {
         // I'm trying to work it out, but for now just press '0' to start the audio
             
         this.background = this.add.sprite(0, 0,"background").setOrigin(0.25,0.25).setDepth(-2);
-        this.background.setScale(1.5);
+        this.background.setScale(5.0);
 
         let debugConfig = {
             fontFamily: 'Century Gothic',
@@ -83,6 +83,7 @@ class Level1 extends Phaser.Scene {
         keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         key0 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ZERO);
         keyLEFTARROW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHTARROW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -91,6 +92,15 @@ class Level1 extends Phaser.Scene {
     }
 
     update() {
+        if (Phaser.Input.Keyboard.JustDown(key0)) {
+            this.scene.start("EndCutscene");
+            //musicPlaying = true;
+        }
+
+        if (playerWin == true) {
+            this.scene.start("EndCustcene");
+        }
+
         this.player.update();
         let sw;
         for(let s of this.switches) {
@@ -98,7 +108,7 @@ class Level1 extends Phaser.Scene {
             sw = s;
         } 
         this.debugCoords.text = "angle state: " + this.angleTestText() + ", distance: " + this.distanceBetweenSwitchAndPlayer();//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
-        if(Phaser.Input.Keyboard.JustDown(key0)){
+        if(Phaser.Input.Keyboard.JustDown(keyF)){
             this.startTheMusic();
         }
         if(Phaser.Input.Keyboard.JustDown(keyRIGHTARROW)){

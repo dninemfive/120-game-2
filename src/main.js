@@ -2,7 +2,7 @@ let config = {
     type: Phaser.CANVAS,
     width: window.innerWidth - 30,
     height: window.innerHeight - 15,
-    scene: [Menu, Level1, Instructions],
+    scene: [Menu, Level1, Instructions, EndCutscene],
     physics: {
         default: 'arcade',
         arcade: {debug:true}
@@ -10,6 +10,7 @@ let config = {
 }
 
 let musicPlaying = false;
+let playerWin = false;
 
 //blinking text, credit: https://www.stephengarside.co.uk/blog/phaser-3-flashing-text-easy-example/
 class TweenHelper {
@@ -61,7 +62,7 @@ let game = new Phaser.Game(config);
 let borderUISize = game.config.height / 15;
 let borderPadding = borderUISize / 3;
 
-let keyLeft, keyRight, keyUp, keyDown, keyI, keyEsc, keySpace, key0, keyLEFTARROW, keyRIGHTARROW;
+let keyLeft, keyRight, keyUp, keyDown, keyI, keyEsc, keySpace, keyR, keyF, keyC, key0, keyLEFTARROW, keyRIGHTARROW;
 
 // globals
 let mapDims = {width: 4000, height: 4000 },

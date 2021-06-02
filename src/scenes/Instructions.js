@@ -32,11 +32,15 @@ class Instructions extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2.5 - borderUISize -
             borderPadding, 'Slow Tempo and single notes, furthest from target.', instructConfig).setOrigin(0.5); 
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize -
-            borderPadding, 'Disonant, low notes indicate danger. You are not alone in the darkness.', instructConfig).setOrigin(0.5); 
-        this.add.text(game.config.width/2, game.config.height/1.5 - borderUISize -
-            borderPadding, 'Watch your back, and move quickly. Flipping switches illuminates the surrounding parameter.', instructConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/1.3- borderUISize -
-            borderPadding, 'Flip all switches to illuminate the door to the next area. WASD to move, E to interact. Good luck.', instructConfig).setOrigin(0.5);
+            borderPadding, 'You are Flame, denizen of the Light Dimension. You have lost your way in the Musical dimension,', instructConfig).setOrigin(0.5); 
+        this.add.text(game.config.width/2, game.config.height/1.8 - borderUISize -
+            borderPadding, 'a dark realm where all beings use sound to traverse the darkness. A trail of Safety Switches guides players to safety,', instructConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/1.63 - borderUISize -
+            borderPadding, 'lest they lose themselves to the darkness for all eternity. Flipping a switch illuminates ', instructConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/1.5- borderUISize -
+            borderPadding, 'the surrounding parameter for safe passage. Few foreigners have escaped the Musical Dimension,', instructConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/1.38- borderUISize -
+            borderPadding, 'but those that have claim flipping all Safety Switches is key. WASD to move, F to FLIP. Good luck.', instructConfig).setOrigin(0.5);
         const commandReturn = this.add.text(game.config.width/2, game.config.height/1.2- borderUISize -
             borderPadding, 'Press Esc to Return', instructConfig).setOrigin(0.5);
         
