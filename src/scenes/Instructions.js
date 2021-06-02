@@ -32,13 +32,13 @@ class Instructions extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2.5 - borderUISize -
             borderPadding, 'Slow Tempo and single notes, furthest from target.', instructConfig).setOrigin(0.5); 
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize -
-            borderPadding, 'You are Flame, denizen of the Light Dimension. You have lost your way in the Musical dimension,', instructConfig).setOrigin(0.5); 
+            borderPadding, 'You are Flame, denizen of the Light Dimension. Your ultimate goal was to find the Light Tower,', instructConfig).setOrigin(0.5); 
         this.add.text(game.config.width/2, game.config.height/1.8 - borderUISize -
-            borderPadding, 'a dark realm where all beings use sound to traverse the darkness. A trail of Safety Switches guides players to safety,', instructConfig).setOrigin(0.5);
+            borderPadding, ' but you have lost your way in the Musical dimension, an unlit realm where all beings use sound to traverse the darkness.', instructConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/1.63 - borderUISize -
-            borderPadding, 'lest they lose themselves to the darkness for all eternity. Flipping a switch illuminates ', instructConfig).setOrigin(0.5);
+            borderPadding, 'A trail of Safety Switches guides players to safety, lest they lose themselves to the darkness for all eternity. ', instructConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/1.5- borderUISize -
-            borderPadding, 'the surrounding parameter for safe passage. Few foreigners have escaped the Musical Dimension,', instructConfig).setOrigin(0.5);
+            borderPadding, 'Flipping a switch illuminates the surrounding parameter for safe passage. Few foreigners have escaped the Musical Dimension,', instructConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/1.38- borderUISize -
             borderPadding, 'but those that have claim flipping all Safety Switches is key. WASD to move, F to FLIP. Good luck.', instructConfig).setOrigin(0.5);
         const commandReturn = this.add.text(game.config.width/2, game.config.height/1.2- borderUISize -
