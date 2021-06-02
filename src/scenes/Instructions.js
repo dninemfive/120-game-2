@@ -34,14 +34,16 @@ class Instructions extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize -
             borderPadding, 'You are Flame, denizen of the Light Dimension. Your ultimate goal was to find the Light Tower,', instructConfig).setOrigin(0.5); 
         this.add.text(game.config.width/2, game.config.height/1.8 - borderUISize -
-            borderPadding, ' but you have lost your way in the Musical dimension, an unlit realm where all beings use sound to traverse the darkness.', instructConfig).setOrigin(0.5);
+            borderPadding, 'but you have lost your way in the Musical Dimension, an unlit realm where all beings use sound to', instructConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/1.63 - borderUISize -
-            borderPadding, 'A trail of Safety Switches guides players to safety, lest they lose themselves to the darkness for all eternity. ', instructConfig).setOrigin(0.5);
+            borderPadding, 'traverse the darkness. A trail of Safety Switches guides foreigners to safety, lest they lose themselves', instructConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/1.5- borderUISize -
-            borderPadding, 'Flipping a switch illuminates the surrounding parameter for safe passage. Few foreigners have escaped the Musical Dimension,', instructConfig).setOrigin(0.5);
+            borderPadding, 'to the darkness for all eternity. Flipping a switch illuminates the surrounding parameter for safe passage.', instructConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/1.38- borderUISize -
-            borderPadding, 'but those that have claim flipping all Safety Switches is key. WASD to move, F to FLIP. Good luck.', instructConfig).setOrigin(0.5);
-        const commandReturn = this.add.text(game.config.width/2, game.config.height/1.2- borderUISize -
+            borderPadding, 'Few foreigners have escaped the Musical Dimension, but those that have claim flipping all Safety Switches is key.', instructConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/1.25- borderUISize -
+            borderPadding, 'WASD to move, F to FLIP. Good luck.', instructConfig).setOrigin(0.5);
+        const commandReturn = this.add.text(game.config.width/2, game.config.height/1.15 - borderUISize -
             borderPadding, 'Press Esc to Return', instructConfig).setOrigin(0.5);
         
         TweenHelper.flashElement(this, commandReturn);
