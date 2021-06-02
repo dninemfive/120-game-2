@@ -9,7 +9,6 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
-        
         this.menumusic = this.sound.add("MenuTheme", { loop: true });
         if (musicPlaying == false) {
             this.menumusic.play();
@@ -60,8 +59,8 @@ class Menu extends Phaser.Scene {
     update() {
 
         if (Phaser.Input.Keyboard.JustDown(keySpace)) {
-            this.scene.start("Level1");
             this.menumusic.stop();
+            this.scene.start("OpeningCutscene");
         }
 
         if(Phaser.Input.Keyboard.JustDown(keyI)) {

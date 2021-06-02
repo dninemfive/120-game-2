@@ -2,7 +2,7 @@ let config = {
     type: Phaser.CANVAS,
     width: window.innerWidth - 30,
     height: window.innerHeight - 15,
-    scene: [Menu, Level1, Instructions, EndCutscene],
+    scene: [Menu, Level1, Instructions, OpeningCutscene, EndCutscene],
     physics: {
         default: 'arcade',
         arcade: {debug:true}
@@ -11,6 +11,7 @@ let config = {
 
 let musicPlaying = false;
 let playerWin = false;
+
 
 //blinking text, credit: https://www.stephengarside.co.uk/blog/phaser-3-flashing-text-easy-example/
 class TweenHelper {
