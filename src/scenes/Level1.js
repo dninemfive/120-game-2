@@ -114,7 +114,7 @@ class Level1 extends Phaser.Scene {
             s.update();
             sw = s;
         } 
-        this.debugCoords.text = "angle state: " + this.angleTestText() + ", distance: " + Math.round(this.distanceBetweenSwitchAndPlayer(this.switches[0])) + ", test: " + this.thisIsWeird(this.switches[0]);//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
+        this.debugCoords.text = "angle state: " + this.angleTestText(this.switches[0]) + ", distance: " + Math.round(this.distanceBetweenSwitchAndPlayer(this.switches[0]));//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
         if(Phaser.Input.Keyboard.JustDown(key0)){
             this.startTheMusic();
         }
@@ -130,8 +130,8 @@ class Level1 extends Phaser.Scene {
             this.rateDown(this.track03);
             this.rateDown(this.track04);
         }
-        this.angleTest(this.track01, this.track02, this.track03, this.track04);
-        this.distanceTest(this.track01, this.track02, this.track03, this.track04);
+        this.angleTest(this.track01, this.track02, this.track03, this.track04, this.switches[0]);
+        this.distanceTest(this.track01, this.track02, this.track03, this.track04, this.switches[0]);
         this.distCheck = this.distanceBetweenSwitchAndPlayer(this.switches[0]);
         //this.debugCoords2.text = "your pos - switch pos = (" + (this.player.pos.x - sw.pos.x) + ", " + (this.player.pos.y - sw.pos.y) + ")";
 
@@ -207,9 +207,9 @@ class Level1 extends Phaser.Scene {
 
     // Here to round up that ugly function in there and make it more obvious
     // what it does.
-    angleBetweenSwitchAndPlayer(){
-        return Phaser.Math.Angle.Between((this.switches[0].pos.x - (game.config.width / 2)), 
-                                         (this.switches[0].pos.y - (game.config.height / 2)),
+    angleBetweenSwitchAndPlayer(currentSwitch){
+        return Phaser.Math.Angle.Between((currentSwitch.pos.x - (game.config.width / 2)), 
+                                         (currentSwitch.pos.y - (game.config.height / 2)),
                                          this.player.pos.x, this.player.pos.y);
     }
 
@@ -249,15 +249,15 @@ class Level1 extends Phaser.Scene {
     *      /     (one track on)     \             
     *  /                                \
     */
-    angleTest(audio1, audio2, audio3, audio4){
+    angleTest(audio1, audio2, audio3, audio4, currentSwitch){
         var PI_OVER_ELEVEN = Math.PI / 11;
         let theta = 0;
         // Subtract the larger angle from the smaller to get the absolute difference
-        if(this.player.rotation > this.angleBetweenSwitchAndPlayer()){
-            theta = this.player.rotation - this.angleBetweenSwitchAndPlayer();
+        if(this.player.rotation > this.angleBetweenSwitchAndPlayer(currentSwitch)){
+            theta = this.player.rotation - this.angleBetweenSwitchAndPlayer(currentSwitch);
         }
         else{
-            theta = this.angleBetweenSwitchAndPlayer() - this.player.rotation;
+            theta = this.angleBetweenSwitchAndPlayer(currentSwitch) - this.player.rotation;
         }
 
         // Subtract half the circle to get the angle compliment
@@ -285,15 +285,15 @@ class Level1 extends Phaser.Scene {
         }
     }
 
-    angleTestText(){
+    angleTestText(currentSwitch){
         var PI_OVER_ELEVEN = Math.PI / 11;
         let theta = 0;
         // Subtract the larger angle from the smaller to get the absolute difference
-        if(this.player.rotation > this.angleBetweenSwitchAndPlayer()){
-            theta = this.player.rotation - this.angleBetweenSwitchAndPlayer();
+        if(this.player.rotation > this.angleBetweenSwitchAndPlayer(currentSwitch)){
+            theta = this.player.rotation - this.angleBetweenSwitchAndPlayer(currentSwitch);
         }
         else{
-            theta = this.angleBetweenSwitchAndPlayer() - this.player.rotation;
+            theta = this.angleBetweenSwitchAndPlayer(currentSwitch) - this.player.rotation;
         }
 
         // Subtract half the circle to get the angle compliment
@@ -323,9 +323,5 @@ class Level1 extends Phaser.Scene {
             this.rateUp(audio3);
             this.rateUp(audio4);
         }
-    }
-
-    thisIsWeird(currentSwitch){
-        return currentSwitch.x;
     }
 }
