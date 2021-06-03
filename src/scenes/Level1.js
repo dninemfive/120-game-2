@@ -323,37 +323,7 @@ class Level1 extends Phaser.Scene {
             this.rateUp(audio4);
         }
         
-        if(this.distanceBetweenSwitchAndPlayer() > 1500){
-            audio1.setRate(0.5);
-            audio2.setRate(0.5);
-            audio3.setRate(0.5);
-            audio4.setRate(0.5);
-        }
-        else if(this.distanceBetweenSwitchAndPlayer() > 1200){
-            audio1.setRate(0.75);
-            audio2.setRate(0.75);
-            audio3.setRate(0.75);
-            audio4.setRate(0.75);
-        }
-        else if(this.distanceBetweenSwitchAndPlayer() > 900){
-            audio1.setRate(1);
-            audio2.setRate(1);
-            audio3.setRate(1);
-            audio4.setRate(1);
-        }
-        else if(this.distanceBetweenSwitchAndPlayer() > 300){
-            audio1.setRate(1.5);
-            audio2.setRate(1.5);
-            audio3.setRate(1.5);
-            audio4.setRate(1.5);
-        }
-        else{
-            audio1.setRate(2);
-            audio2.setRate(2);
-            audio3.setRate(2);
-            audio4.setRate(2);
-        }
-        
+    
     }
     
 }
