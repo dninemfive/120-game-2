@@ -61,19 +61,12 @@ class Level1 extends Phaser.Scene {
             fixedWidth: 0
         }
 
-        this.switches = new Array();//new Set();
-        // We can change this ^ back if you want, but I find arrrays
-        // easier to access in this case, since I can just grab an index...
-        
-        //for(let i = 0; i < 5; i++){aaaaaa
-        //    let w = this.background.displayWidth / 2, h = this.background.displayHeight / 2;
-        //    let x = Phaser.Math.Between(0, w), y = Phaser.Math.Between(0, h);
-        //    this.switches.add(
-        //        new Switch(this, x, y, "SwitchOff").setOrigin(0.5, 0.5)
-        //    );
-        //}
-        //this.switches.add(new Switch(this, 0, 0, "switch").setOrigin(0.5,0.5).setScale(switchScale));
-        this.switches[0] = new Switch(this, 500, -300, "switch").setOrigin(0.5,0.5).setScale(switchScale);
+        this.switches = new Array();        
+        for(let i = 0; i < 5; i++){
+            let w = this.background.displayWidth / 2, h = this.background.displayHeight / 2;
+            let x = Phaser.Math.Between(0, w), y = Phaser.Math.Between(0, h);
+            this.switches[i] = new Switch(this, x, y, "SwitchOff").setOrigin(0.5, 0.5)
+        }
 
         this.debugCoords = this.add.text(game.config.width / 2, game.config.height, "asdf", debugConfig).setOrigin(0.5,1);
         //this.debugCoords2 = this.add.text(game.config.width / 2, game.config.height - 40, "asdf", debugConfig).setOrigin(0.5,1);
@@ -108,11 +101,6 @@ class Level1 extends Phaser.Scene {
         }
 
         this.player.update();
-        let sw;
-        for(let s of this.switches) {
-            s.update();
-            sw = s;
-        } 
         this.debugCoords.text = "angle state: " + this.angleTestText() + ", distance: " + this.distanceBetweenSwitchAndPlayer();//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
         if(Phaser.Input.Keyboard.JustDown(key0)){
             this.startTheMusic();
@@ -132,7 +120,6 @@ class Level1 extends Phaser.Scene {
         this.angleTest(this.track01, this.track02, this.track03, this.track04);
         this.distanceTest(this.track01, this.track02, this.track03, this.track04);
         this.distCheck = this.distanceBetweenSwitchAndPlayer();
-        //this.debugCoords2.text = "your pos - switch pos = (" + (this.player.pos.x - sw.pos.x) + ", " + (this.player.pos.y - sw.pos.y) + ")";
 
     }
 
