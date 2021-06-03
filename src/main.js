@@ -2,7 +2,7 @@ let config = {
     type: Phaser.CANVAS,
     width: window.innerWidth - 30,
     height: window.innerHeight - 15,
-    scene: [Menu, Level1, Instructions, OpeningCutscene, EndCutscene],
+    scene: [Menu, Level1, Instructions, OpeningCutscene, EndCutscene, Credits],
     physics: {
         default: 'arcade',
         arcade: {debug:true}
