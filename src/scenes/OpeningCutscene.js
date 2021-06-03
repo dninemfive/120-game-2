@@ -11,7 +11,7 @@ class OpeningCutscene extends Phaser.Scene {
         this.load.image("Open5", "assets/OpeningCutscenePage5.png");
         this.load.image("Open6", "assets/OpeningCutsceneCutscene6.png");
         this.load.image("Open7", "assets/OpeningCutscenePage7.png");
-        this.load.audio("OpeningTheme", './assets/OpeningTheme.wav');
+        //this.load.audio("OpeningTheme", './assets/OpeningTheme.wav');
         this.load.audio('IntroTheme', './assets/IntroTheme.wav');
     }
 

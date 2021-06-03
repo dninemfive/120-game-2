@@ -74,6 +74,9 @@ class Level1 extends Phaser.Scene {
         //}
         //this.switches.add(new Switch(this, 0, 0, "switch").setOrigin(0.5,0.5).setScale(switchScale));
         this.switches[0] = new Switch(this, 500, -300, "switch").setOrigin(0.5,0.5).setScale(switchScale);
+        this.switches[1] = new Switch(this, -500, -300, "switch").setOrigin(0.5,0.5).setScale(switchScale);
+        this.switches[2] = new Switch(this, -500, 300, "switch").setOrigin(0.5,0.5).setScale(switchScale);
+        this.switches[3] = new Switch(this, 500, 300, "switch").setOrigin(0.5,0.5).setScale(switchScale);
 
         this.debugCoords = this.add.text(game.config.width / 2, game.config.height, "asdf", debugConfig).setOrigin(0.5,1);
         //this.debugCoords2 = this.add.text(game.config.width / 2, game.config.height - 40, "asdf", debugConfig).setOrigin(0.5,1);
@@ -89,11 +92,13 @@ class Level1 extends Phaser.Scene {
         keyRIGHTARROW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
         this.distCheck = this.distanceBetweenSwitchAndPlayer(this.switches[0]);
+        this.switchIterator = 0;
     }
 
     update() {
-        if ((this.distanceBetweenSwitchAndPlayer(this.switches[0]) < 70) && 
+        if ((this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]) < 70) && 
             Phaser.Input.Keyboard.JustDown(keyF)) {
+            
             this.ambience.stop();
             this.track01.stop();
             this.track02.stop();
@@ -101,6 +106,8 @@ class Level1 extends Phaser.Scene {
             this.track04.stop();
             this.scene.start("EndCutscene");
             //musicPlaying = true;
+            
+           this.switchIterator += 1;
         }
 
         if (playerWin == true) {
@@ -114,7 +121,7 @@ class Level1 extends Phaser.Scene {
             s.update();
             sw = s;
         } 
-        this.debugCoords.text = "angle state: " + this.angleTestText(this.switches[0]) + ", distance: " + Math.round(this.distanceBetweenSwitchAndPlayer(this.switches[0]));//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
+        this.debugCoords.text = "angle state: " + this.angleTestText(this.switches[this.switchIterator]) + ", distance: " + Math.round(this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]));//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
         if(Phaser.Input.Keyboard.JustDown(key0)){
             this.startTheMusic();
         }
@@ -130,9 +137,9 @@ class Level1 extends Phaser.Scene {
             this.rateDown(this.track03);
             this.rateDown(this.track04);
         }
-        this.angleTest(this.track01, this.track02, this.track03, this.track04, this.switches[0]);
-        this.distanceTest(this.track01, this.track02, this.track03, this.track04, this.switches[0]);
-        this.distCheck = this.distanceBetweenSwitchAndPlayer(this.switches[0]);
+        this.angleTest(this.track01, this.track02, this.track03, this.track04, this.switches[this.switchIterator]);
+        this.distanceTest(this.track01, this.track02, this.track03, this.track04, this.switches[this.switchIterator]);
+        this.distCheck = this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]);
         //this.debugCoords2.text = "your pos - switch pos = (" + (this.player.pos.x - sw.pos.x) + ", " + (this.player.pos.y - sw.pos.y) + ")";
 
     }
