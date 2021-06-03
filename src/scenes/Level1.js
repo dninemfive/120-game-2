@@ -88,11 +88,12 @@ class Level1 extends Phaser.Scene {
         keyLEFTARROW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHTARROW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
-        this.distCheck = this.distanceBetweenSwitchAndPlayer();
+        this.distCheck = this.distanceBetweenSwitchAndPlayer(this.switches[0]);
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(keyF)) {
+        if ((this.distanceBetweenSwitchAndPlayer(this.switches[0]) < 70) && 
+            Phaser.Input.Keyboard.JustDown(keyF)) {
             this.ambience.stop();
             this.track01.stop();
             this.track02.stop();
@@ -113,7 +114,7 @@ class Level1 extends Phaser.Scene {
             s.update();
             sw = s;
         } 
-        this.debugCoords.text = "angle state: " + this.angleTestText() + ", distance: " + this.distanceBetweenSwitchAndPlayer();//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
+        this.debugCoords.text = "angle state: " + this.angleTestText() + ", distance: " + Math.round(this.distanceBetweenSwitchAndPlayer(this.switches[0])) + ", test: " + this.thisIsWeird(this.switches[0]);//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
         if(Phaser.Input.Keyboard.JustDown(key0)){
             this.startTheMusic();
         }
@@ -131,7 +132,7 @@ class Level1 extends Phaser.Scene {
         }
         this.angleTest(this.track01, this.track02, this.track03, this.track04);
         this.distanceTest(this.track01, this.track02, this.track03, this.track04);
-        this.distCheck = this.distanceBetweenSwitchAndPlayer();
+        this.distCheck = this.distanceBetweenSwitchAndPlayer(this.switches[0]);
         //this.debugCoords2.text = "your pos - switch pos = (" + (this.player.pos.x - sw.pos.x) + ", " + (this.player.pos.y - sw.pos.y) + ")";
 
     }
@@ -209,6 +210,13 @@ class Level1 extends Phaser.Scene {
     angleBetweenSwitchAndPlayer(){
         return Phaser.Math.Angle.Between((this.switches[0].pos.x - (game.config.width / 2)), 
                                          (this.switches[0].pos.y - (game.config.height / 2)),
+                                         this.player.pos.x, this.player.pos.y);
+    }
+
+    // Make our funky relation calculations look nice...
+    distanceBetweenSwitchAndPlayer(currentSwitch){
+        return Phaser.Math.Distance.Between((currentSwitch.pos.x - (game.config.width / 2)), 
+                                         (currentSwitch.pos.y - (game.config.height / 2)),
                                          this.player.pos.x, this.player.pos.y);
     }
 
@@ -302,28 +310,22 @@ class Level1 extends Phaser.Scene {
         return 2;
     }
 
-    // Make our funky relation calculations look nice...
-    distanceBetweenSwitchAndPlayer(){
-        return Phaser.Math.Distance.Between((this.switches[0].pos.x - (game.config.width / 2)), 
-                                         (this.switches[0].pos.y - (game.config.height / 2)),
-                                         this.player.pos.x, this.player.pos.y);
-    }
-
-    distanceTest(audio1, audio2, audio3, audio4){
-        if(this.distanceBetweenSwitchAndPlayer() > this.distCheck){
+    distanceTest(audio1, audio2, audio3, audio4, currentSwitch){
+        if(this.distanceBetweenSwitchAndPlayer(currentSwitch) > this.distCheck){
             this.rateDown(audio1);
             this.rateDown(audio2);
             this.rateDown(audio3);
             this.rateDown(audio4);
         }
-        else if(this.distanceBetweenSwitchAndPlayer() < this.distCheck){
+        else if(this.distanceBetweenSwitchAndPlayer(currentSwitch) < this.distCheck){
             this.rateUp(audio1);
             this.rateUp(audio2);
             this.rateUp(audio3);
             this.rateUp(audio4);
         }
-        
-    
     }
-    
+
+    thisIsWeird(currentSwitch){
+        return currentSwitch.x;
+    }
 }
