@@ -98,16 +98,20 @@ class Level1 extends Phaser.Scene {
     update() {
         if ((this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]) < 70) && 
             Phaser.Input.Keyboard.JustDown(keyF)) {
-            
-            this.ambience.stop();
-            this.track01.stop();
-            this.track02.stop();
-            this.track03.stop();
-            this.track04.stop();
-            this.scene.start("EndCutscene");
-            //musicPlaying = true;
-            
-           this.switchIterator += 1;
+            // if i + 1 would be > number of switches - 1, don't slip into a 
+            // situation where you fall off the end of the array.
+            if((this.switchIterator + 1) == 4){
+                this.ambience.stop();
+                this.track01.stop();
+                this.track02.stop();
+                this.track03.stop();
+                this.track04.stop();
+                this.scene.start("EndCutscene");
+                //musicPlaying = true;
+            }
+            else{
+                this.switchIterator += 1;
+            }
         }
 
         if (playerWin == true) {
