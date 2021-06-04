@@ -18,12 +18,12 @@ class Player extends Phaser.GameObjects.Sprite {
         if (keyLeft.isDown) {
             //velocity.x -= playerSpeed;
             //this.rotationInternal -= 0.01;
-            this.rotation -= 0.05;
+            this.rotation -= 0.03;
         }
         if (keyRight.isDown) {
             //velocity.x += playerSpeed;
             //this.rotationInternal += 0.01;
-            this.rotation += 0.05;
+            this.rotation += 0.03;
         }
         this.clampRotation();
         if (keyUp.isDown) {

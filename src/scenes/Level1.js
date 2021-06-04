@@ -62,9 +62,11 @@ class Level1 extends Phaser.Scene {
             fixedWidth: 0
         }
 
-        this.switches = new Array();//new Set();
-        let selectedPoints = this.switchSetup();
-        for(let i = 0; i < 5; i++){
+        this.switchNumber = 5;// Important control line, change to alter length of game.
+
+        this.switches = new Array(this.switchNumber);
+        let selectedPoints = this.switchSetup(this.switches.length);
+        for(let i = 0; i < this.switches.length; i++){
             this.switches[i] = new Switch(this, selectedPoints[i].x, selectedPoints[i].y, "switch").setOrigin(0.5,0.5).setScale(switchScale);
         }
         // We can change this ^ back if you want, but I find arrays
@@ -109,11 +111,11 @@ class Level1 extends Phaser.Scene {
     }
 
     update() {
-        if ((this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]) < 70) && 
+        if ((this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]) < 80) && 
             Phaser.Input.Keyboard.JustDown(keyF)) {
             // if i + 1 would be > number of switches - 1, don't slip into a 
             // situation where you fall off the end of the array.
-            if((this.switchIterator + 1) == 4){
+            if((this.switchIterator + 1) == this.switchNumber){
                 this.ambience.stop();
                 this.track01.stop();
                 this.track02.stop();
@@ -355,7 +357,7 @@ class Level1 extends Phaser.Scene {
 
     // This method draws five points from a set of ten, creating a partially
     // random set of switches to hit for the level.
-    switchSetup() {
+    switchSetup(len) {
         let points = [];
         let p0 = new Phaser.Geom.Point(500, -300);
         let p1 = new Phaser.Geom.Point(2000, 2000);
@@ -379,7 +381,7 @@ class Level1 extends Phaser.Scene {
         points.push(p8);
         points.push(p9);
 
-        for(let i = 0; i < 5; i++){
+        for(let i = 0; i < len; i++){
             var randomIndex = Math.floor(Math.random()*points.length);
             points.splice(randomIndex, 1)[0];
         }
