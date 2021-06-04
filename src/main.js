@@ -6,7 +6,24 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {debug:true}
-    }
+    },
+    // This \/ was an attempt at dynamic scaling, but not sure how to work it exactly.
+    // Apparently requires a CSS file to accomplany it, which I deleted, but we can
+    // try it again if you'd like.
+    /*
+    callbacks: {
+        postBoot: function (game) {
+            // In v3.15, you have to override Phaser's default styles
+            game.canvas.style.width = '100%';
+            game.canvas.style.height = '100%';
+        }
+    }*/
+    // Also a try at dynamic scaling. This is simpler, and I like that it preserves the
+    // aspect ratio, but I'm still having trouble making getting things right. I'm leaving it as
+    // is for now
+    scale: {
+        mode: Phaser.Scale.FIT
+    },
 }
 
 let musicPlaying = false;

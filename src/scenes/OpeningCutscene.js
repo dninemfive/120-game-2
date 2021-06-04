@@ -35,25 +35,25 @@ class OpeningCutscene extends Phaser.Scene {
         this.showCommands = 0;
 
           this.Open1 = this.add.sprite(0, 0,"Open1").setOrigin(-0.10,-0.025).setDepth(0);
-          this.Open1.setScale(0.3);
+          this.Open1.setScale(0.5);
           this.Open1.alpha = 1;
           this.Open2 = this.add.sprite(0, 0,"Open2").setOrigin(-0.10,-0.025).setDepth(0);
-          this.Open2.setScale(0.3);
+          this.Open2.setScale(0.5);
           this.Open2.alpha = 0;
           this.Open3 = this.add.sprite(0, 0,"Open3").setOrigin(-0.10,-0.025).setDepth(0);
-          this.Open3.setScale(0.3);
+          this.Open3.setScale(0.5);
           this.Open3.alpha = 0;
           this.Open4 = this.add.sprite(0, 0,"Open4").setOrigin(-0.10,-0.025).setDepth(0);
-          this.Open4.setScale(0.65);
+          this.Open4.setScale(0.5);
           this.Open4.alpha = 0;
           this.Open5 = this.add.sprite(0, 0,"Open5").setOrigin(-0.10,-0.025).setDepth(0);
-          this.Open5.setScale(0.65);
+          this.Open5.setScale(0.5);
           this.Open5.alpha = 0;
           this.Open6 = this.add.sprite(0, 0,"Open6").setOrigin(-0.10,-0.025).setDepth(0);
-          this.Open6.setScale(0.65);
+          this.Open6.setScale(0.5);
           this.Open6.alpha = 0;
           this.Open7 = this.add.sprite(0, 0,"Open7").setOrigin(-0.10,-0.025).setDepth(0);
-          this.Open7.setScale(0.65);
+          this.Open7.setScale(0.5);
           this.Open7.alpha = 0;
 
             this.commandSkip = this.skipScene = this.add.text(game.config.width/2, game.config.height/6 - borderUISize -
