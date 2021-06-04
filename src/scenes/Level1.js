@@ -10,7 +10,8 @@ class Level1 extends Phaser.Scene {
         this.load.audio('Temp02', './assets/TLTest2.wav');
         this.load.audio('Temp03', './assets/TLTest3.wav');
         this.load.audio('Temp04', './assets/TLTest4.wav');
-        this.load.audio('Ambience', './assets/Background Ambience.wav');
+        this.load.audio('Ambience', './assets/Background Ambience.wav');  
+        this.load.audio('FinalSwitch', './assets/FinalSwitch.wav');
         this.load.spritesheet("playerside", "assets/Flame.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
         this.load.spritesheet("playerback", "assets/FlameBack.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
         this.load.spritesheet("playerfront", "assets/FlameFront.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
@@ -113,6 +114,8 @@ class Level1 extends Phaser.Scene {
     update() {
         if ((this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]) < 80) && 
             Phaser.Input.Keyboard.JustDown(keyF)) {
+            this.finalswitch = this.sound.add("FinalSwitch", { loop: false });
+            this.finalswitch.play();
             // if i + 1 would be > number of switches - 1, don't slip into a 
             // situation where you fall off the end of the array.
             if((this.switchIterator + 1) == this.switchNumber){

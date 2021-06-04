@@ -15,7 +15,7 @@ class EndCutscene extends Phaser.Scene {
 
     create() {
         this.finalswitch = this.sound.add("FinalSwitch", { loop: false });
-        this.finalswitch.play();
+        //this.finalswitch.play();
         this.endingTheme = this.sound.add("EndTheme", { loop: false });
         this.endingTheme.play();
 
