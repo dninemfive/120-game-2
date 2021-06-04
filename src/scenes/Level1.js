@@ -63,7 +63,11 @@ class Level1 extends Phaser.Scene {
         }
 
         this.switches = new Array();//new Set();
-        // We can change this ^ back if you want, but I find arrrays
+        let selectedPoints = this.switchSetup();
+        for(let i = 0; i < 5; i++){
+            this.switches[i] = new Switch(this, selectedPoints[i].x, selectedPoints[i].y, "switch").setOrigin(0.5,0.5).setScale(switchScale);
+        }
+        // We can change this ^ back if you want, but I find arrays
         // easier to access in this case, since I can just grab an index...
         
         //for(let i = 0; i < 5; i++){aaaaaa
@@ -74,10 +78,18 @@ class Level1 extends Phaser.Scene {
         //    );
         //}
         //this.switches.add(new Switch(this, 0, 0, "switch").setOrigin(0.5,0.5).setScale(switchScale));
-        this.switches[0] = new Switch(this, 500, -300, "switch").setOrigin(0.5,0.5).setScale(switchScale);
+        /*
+        this.switches[0] = new Switch(this, 0, 0, "switch").setOrigin(0.5,0.5).setScale(switchScale);
         this.switches[1] = new Switch(this, -500, -300, "switch").setOrigin(0.5,0.5).setScale(switchScale);
         this.switches[2] = new Switch(this, -500, 300, "switch").setOrigin(0.5,0.5).setScale(switchScale);
         this.switches[3] = new Switch(this, 500, 300, "switch").setOrigin(0.5,0.5).setScale(switchScale);
+        */
+
+        /*
+        this.bucket = [];
+        for (var i=0;i<5;i++) {
+            this.bucket.push(i);
+        }  */ 
 
         this.debugCoords = this.add.text(game.config.width / 2, game.config.height, "asdf", debugConfig).setOrigin(0.5,1);
         //this.debugCoords2 = this.add.text(game.config.width / 2, game.config.height - 40, "asdf", debugConfig).setOrigin(0.5,1);
@@ -132,7 +144,7 @@ class Level1 extends Phaser.Scene {
         } 
         this.debugCoords.text = "angle state: " + this.angleTestText(this.switches[this.switchIterator]) + ", distance: " + Math.round(this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]));//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
         if(Phaser.Input.Keyboard.JustDown(key0)){
-            this.startTheMusic();
+            console.log(this.getRandomFromBucket(this.bucket));
         }
         if(Phaser.Input.Keyboard.JustDown(keyRIGHTARROW)){
             this.rateUp(this.track01);
@@ -340,4 +352,39 @@ class Level1 extends Phaser.Scene {
             this.rateUp(audio4);
         }
     }
+
+    // This method draws five points from a set of ten, creating a partially
+    // random set of switches to hit for the level.
+    switchSetup() {
+        let points = [];
+        let p0 = new Phaser.Geom.Point(500, -300);
+        let p1 = new Phaser.Geom.Point(2000, 2000);
+        let p2 = new Phaser.Geom.Point(-1500, 4000);
+        let p3 = new Phaser.Geom.Point(-3800, -2200);
+        let p4 = new Phaser.Geom.Point(4900, -1090);
+        let p5 = new Phaser.Geom.Point(300, 300);
+        let p6 = new Phaser.Geom.Point(-4010, 2000);
+        let p7 = new Phaser.Geom.Point(-1900, -3850);
+        let p8 = new Phaser.Geom.Point(2900, -800);
+        let p9 = new Phaser.Geom.Point(4700, 4700);
+
+        points.push(p0);
+        points.push(p1);
+        points.push(p2);
+        points.push(p3);
+        points.push(p4);
+        points.push(p5);
+        points.push(p6);
+        points.push(p7);
+        points.push(p8);
+        points.push(p9);
+
+        for(let i = 0; i < 5; i++){
+            var randomIndex = Math.floor(Math.random()*points.length);
+            points.splice(randomIndex, 1)[0];
+        }
+
+        return points;
+    }
+
 }
