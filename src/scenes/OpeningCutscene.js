@@ -11,7 +11,6 @@ class OpeningCutscene extends Phaser.Scene {
         this.load.image("Open5", "assets/OpeningCutscenePage5.png");
         this.load.image("Open6", "assets/OpeningCutsceneCutscene6.png");
         this.load.image("Open7", "assets/OpeningCutscenePage7.png");
-        //this.load.audio("OpeningTheme", './assets/OpeningTheme.wav');
         this.load.audio('IntroTheme', './assets/IntroTheme.wav');
     }
 
@@ -36,13 +35,13 @@ class OpeningCutscene extends Phaser.Scene {
         this.showCommands = 0;
 
           this.Open1 = this.add.sprite(0, 0,"Open1").setOrigin(-0.10,-0.025).setDepth(0);
-          this.Open1.setScale(0.65);
+          this.Open1.setScale(0.3);
           this.Open1.alpha = 1;
           this.Open2 = this.add.sprite(0, 0,"Open2").setOrigin(-0.10,-0.025).setDepth(0);
-          this.Open2.setScale(0.65);
+          this.Open2.setScale(0.3);
           this.Open2.alpha = 0;
           this.Open3 = this.add.sprite(0, 0,"Open3").setOrigin(-0.10,-0.025).setDepth(0);
-          this.Open3.setScale(0.65);
+          this.Open3.setScale(0.3);
           this.Open3.alpha = 0;
           this.Open4 = this.add.sprite(0, 0,"Open4").setOrigin(-0.10,-0.025).setDepth(0);
           this.Open4.setScale(0.65);

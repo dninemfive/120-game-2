@@ -43,7 +43,8 @@ class Level1 extends Phaser.Scene {
         this.track04 = this.sound.add('Temp04', audioConfig);
         this.isPlaying = false;
 
-        // \/ not starting correctly
+        // Has to have a delay, worked into the function
+        // May want to consider having manual delay in controlls, too.
         this.startTheMusic();
         // I'm trying to work it out, but for now just press '0' to start the audio
             
@@ -110,6 +111,10 @@ class Level1 extends Phaser.Scene {
                 //musicPlaying = true;
             }
             else{
+                this.track01.setRate(1);
+                this.track02.setRate(1);
+                this.track03.setRate(1);
+                this.track04.setRate(1);
                 this.switchIterator += 1;
             }
         }
