@@ -21,9 +21,10 @@ let config = {
     // Also a try at dynamic scaling. This is simpler, and I like that it preserves the
     // aspect ratio, but I'm still having trouble making getting things right. I'm leaving it as
     // is for now
+    /*
     scale: {
         mode: Phaser.Scale.FIT
-    },
+    },*/
 }
 
 let musicPlaying = false;
