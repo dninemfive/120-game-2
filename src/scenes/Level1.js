@@ -15,6 +15,7 @@ class Level1 extends Phaser.Scene {
         this.load.spritesheet("playerside", "assets/Flame.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
         this.load.spritesheet("playerback", "assets/FlameBack.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
         this.load.spritesheet("playerfront", "assets/FlameFront.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
+        this.load.spritesheet("switchActive", "assets/SwitchOn.png", {frameWidth: 640, frameHeight: 480, startFrame: 0, endFrame: 239});
     }
 
     create() {
@@ -24,6 +25,7 @@ class Level1 extends Phaser.Scene {
         this.anims.create({ key: "playerside", frames: this.anims.generateFrameNumbers("playerside", { start: 0, end: 1, first: 0}), frameRate: 12, repeat: -1 });
         this.anims.create({ key: "playerback", frames: this.anims.generateFrameNumbers("playerback", { start: 0, end: 1, first: 0}), frameRate: 12, repeat: -1 });
         this.anims.create({ key: "playerfront", frames: this.anims.generateFrameNumbers("playerfront", { start: 0, end: 1, first: 0}), frameRate: 12, repeat: -1 });
+        this.anims.create({ key: "switchActive", frames: this.anims.generateFrameNumbers("switchActive", {start: 0, end: 239, first: 0}), frameRate:25, repeat: -1 });
 
         this.player = new Player(this, game.config.width / 2, -100, "playerside").setOrigin(0.5, 0.5).setDepth(1);
         this.player.setScale(playerScale);        
@@ -132,6 +134,9 @@ class Level1 extends Phaser.Scene {
                 this.track02.setRate(1);
                 this.track03.setRate(1);
                 this.track04.setRate(1);
+                this.switches[this.switchIterator].setTexture("switchActive");
+                this.switches[this.switchIterator].anims.play("switchActive");
+                this.switches[this.switchIterator].setScale(0.48);
                 this.switchIterator += 1;
             }
         }
@@ -148,9 +153,6 @@ class Level1 extends Phaser.Scene {
             sw = s;
         } 
         this.debugCoords.text = "angle state: " + this.angleTestText(this.switches[this.switchIterator]) + ", distance: " + Math.round(this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]));//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
-        if(Phaser.Input.Keyboard.JustDown(key0)){
-            console.log(this.getRandomFromBucket(this.bucket));
-        }
         if(Phaser.Input.Keyboard.JustDown(keyRIGHTARROW)){
             this.rateUp(this.track01);
             this.rateUp(this.track02);
