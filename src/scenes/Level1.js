@@ -151,7 +151,8 @@ class Level1 extends Phaser.Scene {
         //this.debugCoords2.text = "your pos - switch pos = (" + (this.player.pos.x - sw.pos.x) + ", " + (this.player.pos.y - sw.pos.y) + ")";
     }
 
-// Helper Functions ==================================
+// Helper Functions =====================================================
+// These functions do the logical heavy lifting for the game itself
 
     //The four tracks need to be the same length in order to loop
     //correctly, but the rhythym demands that they be delayed from

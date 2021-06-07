@@ -17,23 +17,19 @@ class Player extends Phaser.GameObjects.Sprite {
         let velocity = new Phaser.Math.Vector2(0, 0);
         if (keyLeft.isDown) {
             //velocity.x -= playerSpeed;
-            //this.rotationInternal -= 0.01;
             this.rotation -= 0.03;
         }
         if (keyRight.isDown) {
             //velocity.x += playerSpeed;
-            //this.rotationInternal += 0.01;
             this.rotation += 0.03;
         }
         this.clampRotation();
         if (keyUp.isDown) {
             //velocity.y -= playerSpeed;
-            //velocity.setToPolar(this.rotationInternal, playerSpeed);
             velocity.setToPolar(this.rotation, playerSpeed);
         }
         if (keyDown.isDown) {
             //velocity.y += playerSpeed;
-            //velocity.setToPolar(this.rotationInternal, (-1*playerSpeed));
             velocity.setToPolar(this.rotation, (-1*playerSpeed));
         }
 
