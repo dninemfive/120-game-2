@@ -36,6 +36,20 @@ class Player extends Phaser.GameObjects.Sprite {
             //velocity.setToPolar(this.rotationInternal, (-1*playerSpeed));
             velocity.setToPolar(this.rotation, (-1*playerSpeed));
         }
+
+        // Allows Flame to turn around so she isn't moving upsidedown.
+        // Still looks a little awkward, but better than the alternative, I think...
+        var PI_OVER_TWO = Math.PI / 2
+        if (this.rotation > PI_OVER_TWO){
+            this.flipY = true;
+        }
+        else if (this.rotation < (-1 * PI_OVER_TWO)){
+            this.flipY = true;
+        }
+        else {
+            this.flipY = false;
+        }
+
         isDebugTick = (++debugCounter) % 1000 == 0;
         velocity = velocity.limit(playerSpeed);
         this.printed = true;
