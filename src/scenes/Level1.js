@@ -72,6 +72,20 @@ class Level1 extends Phaser.Scene {
         for(let i = 0; i < this.switches.length; i++){
             this.switches[i] = new Switch(this, selectedPoints[i].x, selectedPoints[i].y, "switch").setOrigin(0.5,0.5).setScale(switchScale);
         }
+
+        // This block is a load buffer for the switch animation.
+        // Without it, there is a delay upon activating the first switch, as phaser
+        // needs time to unpack the spritesheet. This forces that process before gameplay,
+        // as it ensures that the switch animation is rendered for 1/10th of a second just
+        // beyond the top left corner of the screen.
+        this.animLoadSwitch = new Switch(this, -50, -50, "switchActive").setOrigin(0.5,0.5).setScale(switchScale);
+        this.animLoadSwitch.anims.play("switchActive");
+        this.time.addEvent({
+            delay: 100,
+            callback: ()=>{
+                this.animLoadSwitch.destroy();
+            }
+        })
         // We can change this ^ back if you want, but I find arrays
         // easier to access in this case, since I can just grab an index...
         
@@ -152,7 +166,7 @@ class Level1 extends Phaser.Scene {
             s.update();
             sw = s;
         } 
-        this.debugCoords.text = "angle state: " + this.angleTestText(this.switches[this.switchIterator]) + ", distance: " + Math.round(this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]));//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
+        this.debugCoords.text = "direction: " + this.angleTestText(this.switches[this.switchIterator]) + "         distance: " + Math.round(this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]));//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
         if(Phaser.Input.Keyboard.JustDown(keyRIGHTARROW)){
             this.rateUp(this.track01);
             this.rateUp(this.track02);
@@ -164,6 +178,14 @@ class Level1 extends Phaser.Scene {
             this.rateDown(this.track02);
             this.rateDown(this.track03);
             this.rateDown(this.track04);
+        }
+        if(Phaser.Input.Keyboard.JustDown(key0)){
+            this.ambience.stop();
+                this.track01.stop();
+                this.track02.stop();
+                this.track03.stop();
+                this.track04.stop();
+                this.scene.start("EndCutscene");
         }
         this.angleTest(this.track01, this.track02, this.track03, this.track04, this.switches[this.switchIterator]);
         this.distanceTest(this.track01, this.track02, this.track03, this.track04, this.switches[this.switchIterator]);
@@ -337,12 +359,12 @@ class Level1 extends Phaser.Scene {
         theta = Math.abs(theta);
 
         if(theta < PI_OVER_ELEVEN){
-            return 0;
+            return "straight ahead";
         }
         else if(theta < (9*PI_OVER_ELEVEN)){
-            return 1;
+            return "turn";
         }
-        return 2;
+        return "other way";
     }
 
     distanceTest(audio1, audio2, audio3, audio4, currentSwitch){
