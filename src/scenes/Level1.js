@@ -146,7 +146,9 @@ class Level1 extends Phaser.Scene {
         this.distanceTest(this.track01, this.track02, this.track03, this.track04, this.switches[this.switchIterator]);
         this.distCheck = this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]);
 
-        this.debugCoords.text = "direction: " + this.angleTestText(this.switches[this.switchIterator]) + "         distance: " + Math.round(this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]));
+        // Uncomment this line to have assistance in finding switches.
+        //this.debugCoords.text = "direction: " + this.angleTestText(this.switches[this.switchIterator]) + "         distance: " + Math.round(this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]));
+        
         // Leaving this \/ here for the formula...
         //this.debugCoords2.text = "your pos - switch pos = (" + (this.player.pos.x - sw.pos.x) + ", " + (this.player.pos.y - sw.pos.y) + ")";
     }
