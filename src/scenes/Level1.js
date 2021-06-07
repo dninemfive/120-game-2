@@ -31,9 +31,6 @@ class Level1 extends Phaser.Scene {
         this.player.setScale(playerScale);        
         this.player.anims.play("playerside");
         
-        //Change mute to true to work with audio layering. The tracks will
-        //start playing muted, then use muteToggle to add them in or out in
-        //order and as needed.
         let audioConfig = {
             rate : 1,
             mute : false,
@@ -47,9 +44,8 @@ class Level1 extends Phaser.Scene {
         this.isPlaying = false;
 
         // Has to have a delay, worked into the function
-        // May want to consider having manual delay in controlls, too.
+        // May want to consider having manual delay in controls, too.
         this.startTheMusic();
-        // I'm trying to work it out, but for now just press '0' to start the audio
             
         this.background = this.add.sprite(0, 0,"background").setOrigin(0.25,0.25).setDepth(-2);
         this.background.setScale(5.0);
@@ -110,7 +106,11 @@ class Level1 extends Phaser.Scene {
             this.bucket.push(i);
         }  */ 
 
-        this.debugCoords = this.add.text(game.config.width / 2, game.config.height, "asdf", debugConfig).setOrigin(0.5,1);
+
+        
+        
+
+        this.debugCoords = this.add.text(game.config.width / 2, game.config.height, "", debugConfig).setOrigin(0.5,1);
         //this.debugCoords2 = this.add.text(game.config.width / 2, game.config.height - 40, "asdf", debugConfig).setOrigin(0.5,1);
         //console.log(this.background.displayWidth + "; " + this.background.displayHeight);
 
@@ -166,7 +166,7 @@ class Level1 extends Phaser.Scene {
             s.update();
             sw = s;
         } 
-        this.debugCoords.text = "direction: " + this.angleTestText(this.switches[this.switchIterator]) + "         distance: " + Math.round(this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]));//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
+        //this.debugCoords.text = "direction: " + this.angleTestText(this.switches[this.switchIterator]) + "         distance: " + Math.round(this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]));//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
         if(Phaser.Input.Keyboard.JustDown(keyRIGHTARROW)){
             this.rateUp(this.track01);
             this.rateUp(this.track02);
@@ -187,6 +187,9 @@ class Level1 extends Phaser.Scene {
                 this.track04.stop();
                 this.scene.start("EndCutscene");
         }
+
+        
+
         this.angleTest(this.track01, this.track02, this.track03, this.track04, this.switches[this.switchIterator]);
         this.distanceTest(this.track01, this.track02, this.track03, this.track04, this.switches[this.switchIterator]);
         this.distCheck = this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]);
