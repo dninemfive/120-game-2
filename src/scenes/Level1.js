@@ -13,8 +13,8 @@ class Level1 extends Phaser.Scene {
         this.load.audio('Ambience', './assets/Background Ambience.wav');  
         this.load.audio('FinalSwitch', './assets/FinalSwitch.wav');
         this.load.spritesheet("playerside", "assets/Flame.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
-        this.load.spritesheet("playerback", "assets/FlameBack.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
-        this.load.spritesheet("playerfront", "assets/FlameFront.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
+        //this.load.spritesheet("playerback", "assets/FlameBack.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
+        //this.load.spritesheet("playerfront", "assets/FlameFront.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
         this.load.spritesheet("switchActive", "assets/SwitchOn.png", {frameWidth: 640, frameHeight: 480, startFrame: 0, endFrame: 239});
     }
 
@@ -23,8 +23,8 @@ class Level1 extends Phaser.Scene {
         this.ambience.play();
 
         this.anims.create({ key: "playerside", frames: this.anims.generateFrameNumbers("playerside", { start: 0, end: 1, first: 0}), frameRate: 12, repeat: -1 });
-        this.anims.create({ key: "playerback", frames: this.anims.generateFrameNumbers("playerback", { start: 0, end: 1, first: 0}), frameRate: 12, repeat: -1 });
-        this.anims.create({ key: "playerfront", frames: this.anims.generateFrameNumbers("playerfront", { start: 0, end: 1, first: 0}), frameRate: 12, repeat: -1 });
+        //this.anims.create({ key: "playerback", frames: this.anims.generateFrameNumbers("playerback", { start: 0, end: 1, first: 0}), frameRate: 12, repeat: -1 });
+        //this.anims.create({ key: "playerfront", frames: this.anims.generateFrameNumbers("playerfront", { start: 0, end: 1, first: 0}), frameRate: 12, repeat: -1 });
         this.anims.create({ key: "switchActive", frames: this.anims.generateFrameNumbers("switchActive", {start: 0, end: 239, first: 0}), frameRate:25, repeat: -1 });
 
         this.player = new Player(this, game.config.width / 2, -100, "playerside").setOrigin(0.5, 0.5).setDepth(1);
@@ -82,37 +82,6 @@ class Level1 extends Phaser.Scene {
                 this.animLoadSwitch.destroy();
             }
         })
-        // We can change this ^ back if you want, but I find arrays
-        // easier to access in this case, since I can just grab an index...
-        
-        //for(let i = 0; i < 5; i++){aaaaaa
-        //    let w = this.background.displayWidth / 2, h = this.background.displayHeight / 2;
-        //    let x = Phaser.Math.Between(0, w), y = Phaser.Math.Between(0, h);
-        //    this.switches.add(
-        //        new Switch(this, x, y, "SwitchOff").setOrigin(0.5, 0.5)
-        //    );
-        //}
-        //this.switches.add(new Switch(this, 0, 0, "switch").setOrigin(0.5,0.5).setScale(switchScale));
-        /*
-        this.switches[0] = new Switch(this, 0, 0, "switch").setOrigin(0.5,0.5).setScale(switchScale);
-        this.switches[1] = new Switch(this, -500, -300, "switch").setOrigin(0.5,0.5).setScale(switchScale);
-        this.switches[2] = new Switch(this, -500, 300, "switch").setOrigin(0.5,0.5).setScale(switchScale);
-        this.switches[3] = new Switch(this, 500, 300, "switch").setOrigin(0.5,0.5).setScale(switchScale);
-        */
-
-        /*
-        this.bucket = [];
-        for (var i=0;i<5;i++) {
-            this.bucket.push(i);
-        }  */ 
-
-
-        
-        
-
-        this.debugCoords = this.add.text(game.config.width / 2, game.config.height, "", debugConfig).setOrigin(0.5,1);
-        //this.debugCoords2 = this.add.text(game.config.width / 2, game.config.height - 40, "asdf", debugConfig).setOrigin(0.5,1);
-        //console.log(this.background.displayWidth + "; " + this.background.displayHeight);
 
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -120,11 +89,11 @@ class Level1 extends Phaser.Scene {
         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         key0 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ZERO);
-        keyLEFTARROW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        keyRIGHTARROW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
         this.distCheck = this.distanceBetweenSwitchAndPlayer(this.switches[0]);
         this.switchIterator = 0;
+
+        this.debugCoords = this.add.text(game.config.width / 2, game.config.height - 15, "", debugConfig).setOrigin(0.5,1);
     }
 
     update() {
@@ -141,7 +110,6 @@ class Level1 extends Phaser.Scene {
                 this.track03.stop();
                 this.track04.stop();
                 this.scene.start("EndCutscene");
-                //musicPlaying = true;
             }
             else{
                 this.track01.setRate(1);
@@ -155,46 +123,32 @@ class Level1 extends Phaser.Scene {
             }
         }
 
-        if (playerWin == true) {
-            this.ambience.stop();
-            this.scene.start("EndCustcene");
-        }
-
         this.player.update();
         let sw;
         for(let s of this.switches) {
             s.update();
             sw = s;
         } 
-        //this.debugCoords.text = "direction: " + this.angleTestText(this.switches[this.switchIterator]) + "         distance: " + Math.round(this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]));//"player facing " + this.playerOppositeAngle().toFixed(2) + ", angle between " + this.angleBetweenSwitchAndPlayer().toFixed(2);//this.player.rotationInternal;
-        if(Phaser.Input.Keyboard.JustDown(keyRIGHTARROW)){
-            this.rateUp(this.track01);
-            this.rateUp(this.track02);
-            this.rateUp(this.track03);
-            this.rateUp(this.track04);
-        }
-        if(Phaser.Input.Keyboard.JustDown(keyLEFTARROW)){
-            this.rateDown(this.track01);
-            this.rateDown(this.track02);
-            this.rateDown(this.track03);
-            this.rateDown(this.track04);
-        }
+        
+        // Here for debug purposes
+        /*
         if(Phaser.Input.Keyboard.JustDown(key0)){
             this.ambience.stop();
-                this.track01.stop();
-                this.track02.stop();
-                this.track03.stop();
-                this.track04.stop();
-                this.scene.start("EndCutscene");
+            this.track01.stop();
+            this.track02.stop();
+            this.track03.stop();
+            this.track04.stop();
+            this.scene.start("EndCutscene");
         }
-
-        
+        */
 
         this.angleTest(this.track01, this.track02, this.track03, this.track04, this.switches[this.switchIterator]);
         this.distanceTest(this.track01, this.track02, this.track03, this.track04, this.switches[this.switchIterator]);
         this.distCheck = this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]);
-        //this.debugCoords2.text = "your pos - switch pos = (" + (this.player.pos.x - sw.pos.x) + ", " + (this.player.pos.y - sw.pos.y) + ")";
 
+        this.debugCoords.text = "direction: " + this.angleTestText(this.switches[this.switchIterator]) + "         distance: " + Math.round(this.distanceBetweenSwitchAndPlayer(this.switches[this.switchIterator]));
+        // Leaving this \/ here for the formula...
+        //this.debugCoords2.text = "your pos - switch pos = (" + (this.player.pos.x - sw.pos.x) + ", " + (this.player.pos.y - sw.pos.y) + ")";
     }
 
 // Helper Functions ==================================
@@ -238,19 +192,7 @@ class Level1 extends Phaser.Scene {
         }
     }
 
-    //This does exaclty what it sounds like. I was using this to layer audio
-    //in and out. If you want to play with that, the order doesn't really matter,
-    //but I wrote it to be track 1, 2, 3, then 4.
-    muteToggle(audio){
-        if(audio.mute == true){
-            audio.setMute(false);
-        }
-        else{
-            audio.setMute(true);
-        }
-    }
-
-    //The two functions play with the rate of playback, it detunes it, because
+    //These two functions play with the rate of playback, it detunes it, because
     //of course it does, but it's one method of achieving the speed element to
     //the sound effects.
     rateUp(audio){
@@ -278,14 +220,6 @@ class Level1 extends Phaser.Scene {
         return Phaser.Math.Distance.Between((currentSwitch.pos.x - (game.config.width / 2)), 
                                          (currentSwitch.pos.y - (game.config.height / 2)),
                                          this.player.pos.x, this.player.pos.y);
-    }
-
-    // Finds the opposite angle of the direction the player is facing
-    playerOppositeAngle(){
-        if(this.player.rotation <= 0){
-            return this.player.rotation + Math.PI;
-        }
-        return this.player.rotation - Math.PI;
     }
 
     // This function is responsible for governing the musical layering based on the
