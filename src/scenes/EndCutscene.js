@@ -15,7 +15,7 @@ class EndCutscene extends Phaser.Scene {
 
     create() {
         this.finalswitch = this.sound.add("FinalSwitch", { loop: false });
-        //this.finalswitch.play();
+        this.finalswitch.play();
         this.endingTheme = this.sound.add("EndTheme", { loop: false });
         this.endingTheme.play();
 
@@ -38,19 +38,19 @@ class EndCutscene extends Phaser.Scene {
         this.showCommands = 0;
 
           this.End1 = this.add.sprite(0, 0,"End1").setOrigin(-0.10,-0.025).setDepth(0);
-          this.End1.setScale(0.5);
+          this.End1.setScale(0.65);
           this.End1.alpha = 1;
           this.End2 = this.add.sprite(0, 0,"End2").setOrigin(-0.10,-0.025).setDepth(0);
-          this.End2.setScale(0.5);
+          this.End2.setScale(0.65);
           this.End2.alpha = 0;
           this.End3 = this.add.sprite(0, 0,"End3").setOrigin(-0.10,-0.025).setDepth(0);
-          this.End3.setScale(0.5);
+          this.End3.setScale(0.65);
           this.End3.alpha = 0;
           this.End4 = this.add.sprite(0, 0,"End4").setOrigin(-0.10,-0.025).setDepth(0);
-          this.End4.setScale(0.5);
+          this.End4.setScale(0.65);
           this.End4.alpha = 0;
           this.End5 = this.add.sprite(0, 0,"End5").setOrigin(-0.10,-0.025).setDepth(0);
-          this.End5.setScale(0.5);
+          this.End5.setScale(0.65);
           this.End5.alpha = 0;
 
           this.LightTower = this.add.text(game.config.width/2, game.config.height/6 - borderUISize -

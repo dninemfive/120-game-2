@@ -32,7 +32,7 @@ class Credits extends Phaser.Scene {
             this.skipScene = this.add.text(game.config.width/3.5, game.config.height/3 - borderUISize -
                 borderPadding, 'Lucas Bryant', CreditConfig).setOrigin(0.5);
             this.add.text(game.config.width/3.5, game.config.height/2.5 - borderUISize -
-                borderPadding, 'Programmer', CreditConfig).setOrigin(0.5);
+                borderPadding, 'Lead Programmer', CreditConfig).setOrigin(0.5);
             this.add.text(game.config.width/3.5, game.config.height/2.2 - borderUISize -
                 borderPadding, 'Sound Designer', CreditConfig).setOrigin(0.5);
             this.add.text(game.config.width/1.4, game.config.height/3 - borderUISize -
@@ -40,11 +40,11 @@ class Credits extends Phaser.Scene {
             this.add.text(game.config.width/1.4, game.config.height/2.5 - borderUISize -
                 borderPadding, 'Artist, Writer, Sound Designer', CreditConfig).setOrigin(0.5);
             this.add.text(game.config.width/1.4, game.config.height/2.2 - borderUISize -
-                borderPadding, 'Scene Structure Programmer', CreditConfig).setOrigin(0.5);
+                borderPadding, 'Programmer', CreditConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/1.7 - borderUISize -
                 borderPadding, 'Graydon Simons', CreditConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/1.55 - borderUISize -
-                borderPadding, 'Lead Programmer', CreditConfig).setOrigin(0.5);
+                borderPadding, 'Programmer', CreditConfig).setOrigin(0.5);
                
             
                 

@@ -4,14 +4,27 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
-        this.load.audio("MenuTheme", "assets/TrailingLightsMenuTheme.ogg");
+        this.load.audio("MenuTheme", "assets/TrailingLightsMenuTheme.ogg"); //original theme
+        this.load.audio('MenuTheme2', './assets/Background Music 1.wav'); //inspired by layers of fear ost
+        this.load.audio('MenuTheme3', './assets/BackgroundMusic2.wav'); //inspired by What a Wonderful World
 
     }
 
     create() {
+        let randomnum = Math.random();
+        console.log(randomnum);
+
         if (musicPlaying == false) {
             this.menumusic = this.sound.add("MenuTheme", { loop: true });
-            this.menumusic.play();
+            this.menumusic2 = this.sound.add("MenuTheme2", {volume: 0.2}, { loop: true});
+            this.menumusic3 = this.sound.add("MenuTheme3", {volume: 0.15}, { loop: true});
+            if (randomnum < 0.25) {
+                this.menumusic3.play();
+            } else if (randomnum < 0.50) {
+                this.menumusic2.play();
+            } else {
+                this.menumusic.play();
+            }
         }
 
         let menuConfig = {
@@ -66,6 +79,8 @@ class Menu extends Phaser.Scene {
 
         if (Phaser.Input.Keyboard.JustDown(keySpace)) {
             this.menumusic.stop();
+            this.menumusic2.stop();
+            this.menumusic3.stop();
             this.scene.start("OpeningCutscene");
         }
 
