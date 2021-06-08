@@ -11,8 +11,8 @@ class Level1 extends Phaser.Scene {
         this.load.audio('Temp03', './assets/TLTest3.wav');
         this.load.audio('Temp04', './assets/TLTest4.wav');
         this.load.audio('Ambience', './assets/Background Ambience.wav');  
-        this.load.audio('Background1', './assets/Background Music 1.wav');
-        this.load.audio('Background2', './assets/BackgroundMusic2.wav');
+        //this.load.audio('Background1', './assets/Background Music 1.wav');
+        //this.load.audio('Background2', './assets/BackgroundMusic2.wav');
         this.load.audio('FinalSwitch', './assets/FinalSwitch.wav');
         this.load.spritesheet("playerside", "assets/Flame.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
         //this.load.spritesheet("playerback", "assets/FlameBack.png", { frameWidth: 1200, frameHeight: 1200, startFrame: 0, endFrame: 1});
@@ -24,8 +24,8 @@ class Level1 extends Phaser.Scene {
         this.ambience = this.sound.add("Ambience", {volume: 0.5}, { loop: true });
         this.ambience.play();
 
-        this.backgroundmusic = this.sound.add("Background2", {volume: 0.2}, { loop: true});
-        this.backgroundmusic.play();
+        //this.backgroundmusic = this.sound.add("Background2", {volume: 0.2}, { loop: true});
+        //this.backgroundmusic.play();
 
         this.anims.create({ key: "playerside", frames: this.anims.generateFrameNumbers("playerside", { start: 0, end: 1, first: 0}), frameRate: 12, repeat: -1 });
         //this.anims.create({ key: "playerback", frames: this.anims.generateFrameNumbers("playerback", { start: 0, end: 1, first: 0}), frameRate: 12, repeat: -1 });
